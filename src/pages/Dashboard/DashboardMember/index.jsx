@@ -1,13 +1,11 @@
-import { Dropdown, Input, Pagination, Space } from "antd";
 import React from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { FiUser, FiUserCheck, FiEdit } from "react-icons/fi";
-import { IoIosArrowDown, IoMdRemoveCircleOutline } from "react-icons/io";
+import { FiEdit, FiUser, FiUserCheck } from "react-icons/fi";
+import { IoMdRemoveCircleOutline } from "react-icons/io";
 import { RiShieldUserLine } from "react-icons/ri";
 import CustomCard from "../../../components/CustomCard";
-import "../index.css";
-import CustomPagination from "../../../components/CustomPagination";
 import CustomDropdown from "../../../components/CustomDropdown";
+import CustomPagination from "../../../components/CustomPagination";
 
 const DashboardMember = () => {
   const cardMenu = [
@@ -25,24 +23,6 @@ const DashboardMember = () => {
       logo: <FiUser />,
       title: "Silver",
       value: "300,00",
-    },
-  ];
-
-  const items = [
-    {
-      label: <a href="https://www.antgroup.com">1st menu item</a>,
-      key: "0",
-    },
-    {
-      label: <a href="https://www.aliyun.com">2nd menu item</a>,
-      key: "1",
-    },
-    {
-      type: "divider",
-    },
-    {
-      label: "3rd menu item",
-      key: "3",
     },
   ];
 

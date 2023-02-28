@@ -1,8 +1,9 @@
 import React from "react";
-import DashboardLayout from "../../components/DashboardLayout";
 import { Route, Routes } from "react-router-dom";
+import DashboardLayout from "../../components/DashboardLayout";
 import DashboardMain from "./DashboardMain";
 import DashboardMember from "./DashboardMember";
+import DashboardProduct from "./DashboardProduct";
 
 const Dashboard = () => {
   return (
@@ -11,6 +12,7 @@ const Dashboard = () => {
         <Routes>
           <Route exact path="/" element={<DashboardMain />} />
           <Route path="/member" element={<DashboardMember />} />
+          <Route path="/product" element={<DashboardProduct />} />
         </Routes>
       </DashboardLayout>
     </>

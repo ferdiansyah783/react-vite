@@ -1,15 +1,29 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
+import { Suspense, lazy } from "react";
+import CustomLoading from "./components/CustomLoading";
+const Dashboard = lazy(() =>
+  wait(1000).then(() => import("./pages/Dashboard"))
+);
+const Login = lazy(() => wait(1000).then(() => import("./pages/Login")));
+const Register = lazy(() => wait(1000).then(() => import("./pages/Register")));
 
-function App() {
+const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route exact path="/dashboard/*" element={<Dashboard />} />
-        <Route exact path="/" element={<h1>iindex</h1>} />
-      </Routes>
-    </BrowserRouter>
+    <Suspense fallback={<CustomLoading />}>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/signin" element={<Login />} />
+          <Route exact path="/signup" element={<Register />} />
+          <Route exact path="/dashboard/*" element={<Dashboard />} />
+          <Route exact path="/" element={<h1>iindex</h1>} />
+        </Routes>
+      </BrowserRouter>
+    </Suspense>
   );
-}
+};
+
+const wait = (time) => {
+  return new Promise((resolve) => setTimeout(resolve, time));
+};
 
 export default App;
