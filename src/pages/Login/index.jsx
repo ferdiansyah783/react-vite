@@ -38,7 +38,7 @@ const Login = () => {
     }
 
     authApi
-      .login(fieldsLogin)
+      .admin(fieldsLogin)
       .then((result) => {
         if (result.status !== 200) return;
 

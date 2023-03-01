@@ -2,7 +2,7 @@ import React from "react";
 
 const CustomLoading = () => {
   return (
-    <div className="min-w-full min-h-screen flex items-center justify-center rounded-lg">
+    <div className="min-w-full min-h-screen bg-white flex items-center justify-center rounded-lg">
       <div role="status">
         <svg
           aria-hidden="true"

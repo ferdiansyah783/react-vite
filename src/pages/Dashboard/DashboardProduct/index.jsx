@@ -1,19 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BsCart, BsCart4, BsCartCheck, BsCartX } from "react-icons/bs";
 import CustomCard from "../../../components/CustomCard";
 import clsx from "clsx";
 import CustomPagination from "../../../components/CustomPagination";
 import { IoMdRemoveCircleOutline } from "react-icons/io";
 import { FiEdit } from "react-icons/fi";
+import productApi from "../../../api/productApi";
+import authApi from "../../../api/authApi";
 
 const DashboardProduct = () => {
   const [activeNav, setActiveNav] = useState(0);
+  const [totalOfProducts, setTotalOfProducts] = useState(0);
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) return navigate("/signin");
+
+    authApi.setHeader();
+
+    productApi
+      .getProducts()
+      .then((result) => {
+        if (result.status !== 200) return;
+
+        setTotalOfProducts(result?.data?.count);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const cardMenu = [
     {
       logo: <BsCart4 />,
       title: "Products",
-      value: "2,500,00",
+      value: totalOfProducts,
     },
     {
       logo: <BsCart />,
@@ -34,7 +52,7 @@ const DashboardProduct = () => {
 
   return (
     <div className="w-full h-full font-poppins">
-      <div className="grid grid-cols-4 gap-5 drop-shadow rounded-md overflow-hidden mb-10">
+      <div className="grid grid-cols-1 gap-5 drop-shadow rounded-md overflow-hidden mb-10 md:grid-cols-4">
         {cardMenu.map((value, index) => (
           <CustomCard
             key={index}
@@ -44,9 +62,9 @@ const DashboardProduct = () => {
           />
         ))}
       </div>
-      <div className="w-full mb-5">
-        <ul className="flex space-x-5 font-bold text-[#595959]">
-          {["All Products", "Ordered", "Completed", "Canceled"].map(
+      <div className="w-full py-3 mb-5 md:py-0">
+        <ul className="flex space-x-3 font-bold text-[#595959] md:space-x-5">
+          {["Products", "Ordered", "Completed", "Canceled"].map(
             (value, index) => (
               <li
                 key={index}
@@ -110,12 +128,8 @@ const DashboardProduct = () => {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             <tr className="text-[#595959]">
-              <td className="px-6 py-3 whitespace-nowrap">
-                Muhammad Ali
-              </td>
-              <td className="px-6 py-3 whitespace-nowrap">
-                Lorem ipsum dlear
-              </td>
+              <td className="px-6 py-3 whitespace-nowrap">Muhammad Ali</td>
+              <td className="px-6 py-3 whitespace-nowrap">Lorem ipsum dlear</td>
               <td className="px-6 py-3 whitespace-nowrap">11</td>
               <td className="px-6 py-3 whitespace-nowrap">89,000,00</td>
               <td className="px-6 py-3 whitespace-nowrap">
@@ -133,12 +147,8 @@ const DashboardProduct = () => {
               </td>
             </tr>
             <tr className="text-[#595959]">
-            <td className="px-6 py-3 whitespace-nowrap">
-                Jane doe
-              </td>
-              <td className="px-6 py-3 whitespace-nowrap">
-                Doler amet ipsum
-              </td>
+              <td className="px-6 py-3 whitespace-nowrap">Jane doe</td>
+              <td className="px-6 py-3 whitespace-nowrap">Doler amet ipsum</td>
               <td className="px-6 py-3 whitespace-nowrap">45</td>
               <td className="px-6 py-3 whitespace-nowrap">12,000,00</td>
               <td className="px-6 py-3 whitespace-nowrap">
@@ -156,12 +166,8 @@ const DashboardProduct = () => {
               </td>
             </tr>
             <tr className="text-[#595959]">
-            <td className="px-6 py-3 whitespace-nowrap">
-                John Doe
-              </td>
-              <td className="px-6 py-3 whitespace-nowrap">
-                Lorem ipsum dlear
-              </td>
+              <td className="px-6 py-3 whitespace-nowrap">John Doe</td>
+              <td className="px-6 py-3 whitespace-nowrap">Lorem ipsum dlear</td>
               <td className="px-6 py-3 whitespace-nowrap">15</td>
               <td className="px-6 py-3 whitespace-nowrap">34.434,00</td>
               <td className="px-6 py-3 whitespace-nowrap">
@@ -179,12 +185,8 @@ const DashboardProduct = () => {
               </td>
             </tr>
             <tr className="text-[#595959]">
-            <td className="px-6 py-3 whitespace-nowrap">
-                Sebastian
-              </td>
-              <td className="px-6 py-3 whitespace-nowrap">
-                Doler amet ipsum
-              </td>
+              <td className="px-6 py-3 whitespace-nowrap">Sebastian</td>
+              <td className="px-6 py-3 whitespace-nowrap">Doler amet ipsum</td>
               <td className="px-6 py-3 whitespace-nowrap">65</td>
               <td className="px-6 py-3 whitespace-nowrap">56,000,00</td>
               <td className="px-6 py-3 whitespace-nowrap">
@@ -202,12 +204,8 @@ const DashboardProduct = () => {
               </td>
             </tr>
             <tr className="text-[#595959]">
-            <td className="px-6 py-3 whitespace-nowrap">
-                Jack walson
-              </td>
-              <td className="px-6 py-3 whitespace-nowrap">
-                Doler amet ipsum
-              </td>
+              <td className="px-6 py-3 whitespace-nowrap">Jack walson</td>
+              <td className="px-6 py-3 whitespace-nowrap">Doler amet ipsum</td>
               <td className="px-6 py-3 whitespace-nowrap">45</td>
               <td className="px-6 py-3 whitespace-nowrap">36,000,00</td>
               <td className="px-6 py-3 whitespace-nowrap">
@@ -224,7 +222,7 @@ const DashboardProduct = () => {
                 </span>
               </td>
             </tr>
-            <tr className="relative">
+            <tr className="relative hidden md:block">
               <td className="py-5 pl-5">
                 <p className="text-[#595959] font-semibold">
                   showing 1 to 10 of 50 results

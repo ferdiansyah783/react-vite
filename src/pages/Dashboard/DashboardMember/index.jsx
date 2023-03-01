@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FiEdit, FiUser, FiUserCheck } from "react-icons/fi";
 import { IoMdRemoveCircleOutline } from "react-icons/io";
@@ -6,13 +6,32 @@ import { RiShieldUserLine } from "react-icons/ri";
 import CustomCard from "../../../components/CustomCard";
 import CustomDropdown from "../../../components/CustomDropdown";
 import CustomPagination from "../../../components/CustomPagination";
+import userApi from "../../../api/userApi";
+import authApi from "../../../api/authApi";
 
 const DashboardMember = () => {
+  const [totalOfMembers, setTotalOfMembers] = useState(0);
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) return navigate("/signin");
+
+    authApi.setHeader();
+
+    userApi
+      .getUsers()
+      .then((result) => {
+        if (result.status !== 200) return;
+
+        setTotalOfMembers(result?.data?.count);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
   const cardMenu = [
     {
       logo: <RiShieldUserLine />,
       title: "Members",
-      value: "2,500,00",
+      value: totalOfMembers,
     },
     {
       logo: <FiUserCheck />,
@@ -28,7 +47,7 @@ const DashboardMember = () => {
 
   return (
     <div className="w-full h-full font-poppins">
-      <div className="grid grid-cols-4 gap-5 drop-shadow rounded-md overflow-hidden mb-10">
+      <div className="grid grid-cols-1 gap-5 drop-shadow rounded-md overflow-hidden mb-10 md:grid-cols-4">
         {cardMenu.map((value, index) => (
           <CustomCard
             key={index}

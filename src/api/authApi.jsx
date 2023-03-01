@@ -12,6 +12,9 @@ export default {
   async login(data) {
     return await apiClient.post(`login`, data);
   },
+  async admin(data) {
+    return await apiClient.post(`administrator`, data);
+  },
   async logout() {
     return await apiClient.post(`logout`);
   },

@@ -5,7 +5,7 @@ export default function CustomAlert({ isOpen, textColor, bgColor, title }) {
   return (
     <div
       className={clsx(
-        "min-w-full flex justify-center px-4 py-6 absolute text-sm rounded-lg transition-all duration-200 ease-out",
+        "min-w-full flex justify-center px-4 py-6 z-50 absolute text-sm rounded-lg transition-all duration-200 ease-out",
         textColor, bgColor,
         isOpen === true ? "top-0" : "-top-20"
       )}
