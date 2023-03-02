@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React, { useEffect, useRef, useState } from "react";
 
-const CustomDropdown = ({ className }) => {
+const CustomDropdown = ({ className, title, children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -12,10 +12,10 @@ const CustomDropdown = ({ className }) => {
   };
 
   useEffect(() => {
-    document.addEventListener('click', handleOutsideClick);
+    document.addEventListener("click", handleOutsideClick);
 
     return () => {
-      document.removeEventListener('click', handleOutsideClick);
+      document.removeEventListener("click", handleOutsideClick);
     };
   }, []);
 
@@ -26,7 +26,7 @@ const CustomDropdown = ({ className }) => {
         type="button"
         onClick={() => setIsOpen((isOpen) => !isOpen)}
       >
-        Dropdown{" "}
+        {title}
         <svg
           className="w-4 h-4 ml-2"
           aria-hidden="true"
@@ -46,43 +46,7 @@ const CustomDropdown = ({ className }) => {
 
       {isOpen && (
         <div className="z-50 absolute -left-5 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-          <ul
-            className="py-2 text-sm text-gray-700 dark:text-gray-200"
-            aria-labelledby="dropdownDefaultButton"
-          >
-            <li>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Settings
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Earnings
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Sign out
-              </a>
-            </li>
-          </ul>
+          {children}
         </div>
       )}
     </div>

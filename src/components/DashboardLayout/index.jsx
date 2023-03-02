@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import React, { useState } from "react";
 import { AiOutlineBarChart } from "react-icons/ai";
-import { BsCart4 } from "react-icons/bs";
+import { BsCart4, BsChevronDown } from "react-icons/bs";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { RxDashboard, RxHamburgerMenu } from "react-icons/rx";
@@ -120,33 +120,40 @@ const DashboardLayout = ({ children }) => {
                 <button onClick={() => setIsOpenSidebar((prev) => !prev)}>
                   <RxHamburgerMenu className="text-2xl mt-1 md:hidden" />
                 </button>
-                <h1 className="text-lg md:text-2xl font-semibold font-varela">
+                <h1 className="text-lg font-semibold font-varela md:text-2xl">
                   Welcome Admin<span className="text-3xl">&#x270B;</span>
                 </h1>
               </div>
-              <p className="hidden md:block text-base font-poppins text-[#595959]">
+              <p className="hidden text-base font-poppins text-[#595959] md:block">
                 Here's what's hapening in your workpace
               </p>
             </div>
-            <div className="absolute -right-7 md:right-0 md:relative flex items-center space-x-2 md:space-x-4">
+            <div className="absolute -right-7 flex items-center space-x-2 md:space-x-4 md:right-0 md:relative">
               <div className="p-2 bg-slate-100 rounded-full">
-                <MdOutlineNotificationsActive className="text-md md:text-2xl text-indigo-500" />
+                <MdOutlineNotificationsActive className="text-md text-indigo-500 md:text-2xl" />
               </div>
-              <img
-                className="rounded-full w-7 h-7 md:w-10 md:h-10 cursor-pointer"
-                src="https://source.unsplash.com/360x360?people"
-                alt="people"
+              <button
+              className="flex items-center space-x-1"
                 onClick={() => {
                   setIsOpenOption((isOpenOption) => !isOpenOption);
                   setTimeout(() => {
                     setVisibleOption((prev) => !prev);
-                  }, 300);
+                  }, 200);
                 }}
-              />
+              >
+                <img
+                  className="rounded-full w-7 h-7 md:w-10 md:h-10 cursor-pointer"
+                  src="https://source.unsplash.com/360x360?people"
+                  alt="people"
+                />
+                <BsChevronDown className={clsx("text-sm md:text-base transition-all duration-300 ease-in-out", isOpenOption && "rotate-180")} />
+              </button>
             </div>
           </div>
         </header>
-        <main className="mt-20 px-5 py-7 bg-white md:mt-0 md:px-12">{children}</main>
+        <main className="mt-20 px-5 py-7 bg-white md:mt-0 md:px-12">
+          {children}
+        </main>
       </div>
     </div>
   );
