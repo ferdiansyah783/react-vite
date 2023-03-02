@@ -118,7 +118,9 @@ const DashboardProduct = () => {
               type="search"
               name="search"
               placeholder="Search"
-              onChange={(e) => setQuery({ ...query, q: e.target.value })}
+              onChange={(e) =>
+                setQuery({ ...query, _page: 1, q: e.target.value })
+              }
             />
           </label>
           <CustomDropdown
