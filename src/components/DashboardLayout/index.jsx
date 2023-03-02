@@ -151,7 +151,7 @@ const DashboardLayout = ({ children }) => {
             </div>
           </div>
         </header>
-        <main className="mt-20 px-5 py-7 bg-white md:mt-0 md:px-12">
+        <main className="mt-20 px-5 py-5 bg-white md:mt-0 md:px-12">
           {children}
         </main>
       </div>

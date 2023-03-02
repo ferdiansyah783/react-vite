@@ -91,9 +91,9 @@ const CustomPagination = ({
           <li key={index}>
             <button
               className={clsx(
-                "px-4 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700",
-                page === value &&
-                  "active bg-indigo-100 border border-indigo-500 text-indigo-500"
+                "px-4 py-2 leading-tight hover:bg-gray-100 hover:text-gray-700",
+                page === value ?
+                  "active bg-indigo-500 bg-opacity-20 border border-indigo-500 text-indigo-500" : "text-gray-500 bg-white border border-gray-300"
               )}
               onClick={() => setCurrentPage(value)}
             >

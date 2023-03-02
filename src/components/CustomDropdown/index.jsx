@@ -45,7 +45,7 @@ const CustomDropdown = ({ className, title, children }) => {
       </button>
 
       {isOpen && (
-        <div className="z-50 absolute -left-5 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+        <div className="z-50 absolute -left-16 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
           {children}
         </div>
       )}

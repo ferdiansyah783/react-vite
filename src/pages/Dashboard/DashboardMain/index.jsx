@@ -13,21 +13,19 @@ const DashboardMain = () => {
   const [totalOfMembers, setTotalOfMembers] = useState(0);
   const [totalOfProducts, setTotalOfProducts] = useState(0);
 
-
   const navigate = useNavigate(null);
 
   useEffect(() => {
     if (!localStorage.getItem("token")) return navigate("/signin");
 
     authApi.setHeader();
-    
+
     userApi
       .getUsers()
       .then((result) => {
         if (result.status !== 200) return;
 
-        setTotalOfMembers(result?.data?.count)
-
+        setTotalOfMembers(result?.headers["x-total-count"]);
       })
       .catch((error) => console.log(error));
 
@@ -36,7 +34,7 @@ const DashboardMain = () => {
       .then((result) => {
         if (result.status !== 200) return;
 
-        setTotalOfProducts(result?.data?.count)
+        setTotalOfProducts(result?.headers["x-total-count"]);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -112,7 +110,7 @@ const DashboardMain = () => {
     {
       logo: <TbShoppingCart />,
       title: "Total Product",
-      value: totalOfProducts
+      value: totalOfProducts,
     },
   ];
 
