@@ -81,8 +81,8 @@ const DashboardMember = () => {
         ))}
       </div>
       <div>
-        <div className="flex items-center space-x-5 mb-5">
-          <label className="flex items-center space-x-2 border-2 py-2 px-3 w-[30%] rounded-md">
+        <div className="flex justify-end md:justify-start flex-wrap space-y-3 md:space-y-0 items-center space-x-5 mb-5">
+          <label className="flex items-center space-x-2 border-2 py-2 px-3 w-full md:w-[30%] rounded-md">
             <span className="text-xl text-indigo-500">
               <AiOutlineSearch />
             </span>
@@ -135,7 +135,7 @@ const DashboardMember = () => {
             </CustomDropdown>
           </div>
         </div>
-        <div className="w-full border overflow-hidden rounded-xl">
+        <div className="w-full border overflow-x-auto rounded-xl">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr className="text-[#595959]">

@@ -87,7 +87,7 @@ const DashboardProduct = () => {
           />
         ))}
       </div>
-      <div className="w-full flex justify-between items-center py-3 mb-5 md:py-0">
+      <div className="w-full space-y-5 md:space-y-0 md:flex justify-between items-center py-3 mb-2 md:mb-5 md:py-0">
         <ul className="flex space-x-3 font-bold text-[#595959] md:space-x-5">
           {["Products", "Ordered", "Completed", "Canceled"].map(
             (value, index) => (
@@ -108,8 +108,8 @@ const DashboardProduct = () => {
             )
           )}
         </ul>
-        <div className="flex items-center space-x-3">
-          <label className="flex items-center space-x-2 w-96 border-2 py-2 px-3 rounded-md">
+        <div className="flex justify-end md:justify-start flex-wrap space-y-3 md:space-y-0 items-center space-x-3">
+          <label className="flex items-center space-x-2 w-full md:w-96 border-2 py-2 px-3 rounded-md">
             <span className="text-xl text-indigo-500">
               <AiOutlineSearch />
             </span>
@@ -161,7 +161,7 @@ const DashboardProduct = () => {
           </CustomDropdown>
         </div>
       </div>
-      <div className="w-full border overflow-hidden rounded-xl">
+      <div className="w-full border overflow-x-auto rounded-xl">
         <table className="w-full table-auto divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr className="text-[#595959]">
