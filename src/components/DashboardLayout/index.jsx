@@ -85,13 +85,13 @@ const DashboardLayout = ({ children }) => {
       )}
       <nav
         className={clsx(
-          "border-r drop-shadow fixed w-[60%] h-screen bg-white z-10 transition-all duration-300 ease-in-out md:relative md:w-[14%]",
+          "border-r drop-shadow fixed w-[60%] md:w-[30%] lg:w-[18%] 2xl:w-[14%] h-screen bg-white z-10 transition-all duration-300 ease-in-out md:relative",
           isOpenSidebar === true ? "-left-0" : "-left-60 md:-left-0"
         )}
       >
         <div className="px-5 py-7 hidden md:flex items-center space-x-3">
-          <RxDashboard className="text-2xl text-indigo-600" />
-          <h1 className="text-2xl font-extrabold text-[#141414]">Dashboard</h1>
+          <RxDashboard className="text-2xl lg:text-xl 2xl:text-2xl text-indigo-600" />
+          <h1 className="text-2xl lg:text-xl 2xl:text-2xl font-extrabold text-[#141414]">Dashboard</h1>
         </div>
         <ul className="space-y-1 pt-20 md:pt-0">
           {sideMenu.map((value, index) => (
@@ -99,20 +99,20 @@ const DashboardLayout = ({ children }) => {
               <button
                 onClick={() => handleSide(value.link)}
                 className={clsx(
-                  "py-2 px-3 w-full flex items-center space-x-3 rounded-lg md:py-3",
+                  "py-2 2xl:py-3 px-3 w-full flex items-center space-x-3 rounded-lg",
                   activeSide === value.link
                     ? "active bg-indigo-600 text-white"
                     : "hover:bg-indigo-600 hover:bg-opacity-5"
                 )}
               >
-                <span className="text-lg md:text-xl">{value.logo}</span>
-                <span className="text-sm md:text-base">{value.value}</span>
+                <span className="text-lg 2xl:text-xl">{value.logo}</span>
+                <span className="text-sm 2xl:text-base">{value.value}</span>
               </button>
             </li>
           ))}
         </ul>
       </nav>
-      <div className="w-full md:w-[86%]">
+      <div className="w-full md:w-[70%] lg:w-[82%] xl:w-[86%]">
         <header className="fixed z-10 w-full bg-white drop-shadow px-12 py-8 md:py-2 md:relative md:drop-shadow-none">
           <div className="w-full h-full relative flex items-center justify-between">
             <div className="absolute -left-8 space-y-1 md:relative md:left-0 md:top-0">
@@ -120,17 +120,17 @@ const DashboardLayout = ({ children }) => {
                 <button onClick={() => setIsOpenSidebar((prev) => !prev)}>
                   <RxHamburgerMenu className="text-2xl mt-1 md:hidden" />
                 </button>
-                <h1 className="text-lg font-semibold font-varela md:text-2xl">
-                  Welcome Admin<span className="text-3xl">&#x270B;</span>
+                <h1 className="text-lg lg:text-md 2xl:text-2xl font-semibold font-varela">
+                  Welcome Admin<span className="text-3xl lg:text-2xl 2xl:text-3xl">&#x270B;</span>
                 </h1>
               </div>
-              <p className="hidden text-base font-poppins text-[#595959] md:block">
+              <p className="hidden text-base lg:text-sm 2xl:text-base font-poppins text-[#595959] md:block">
                 Here's what's hapening in your workpace
               </p>
             </div>
             <div className="absolute -right-7 flex items-center space-x-2 md:space-x-4 md:right-0 md:relative">
               <div className="p-2 bg-slate-100 rounded-full">
-                <MdOutlineNotificationsActive className="text-md text-indigo-500 md:text-2xl" />
+                <MdOutlineNotificationsActive className="text-md lg:text-xl 2xl:text-2xl text-indigo-500" />
               </div>
               <button
               className="flex items-center space-x-1"
@@ -142,7 +142,7 @@ const DashboardLayout = ({ children }) => {
                 }}
               >
                 <img
-                  className="rounded-full w-7 h-7 md:w-10 md:h-10 cursor-pointer"
+                  className="rounded-full w-7 lg:w-8 2xl:w-10 h-7 lg:h-8 2xl:h-10 cursor-pointer"
                   src="https://source.unsplash.com/360x360?people"
                   alt="people"
                 />
@@ -151,7 +151,7 @@ const DashboardLayout = ({ children }) => {
             </div>
           </div>
         </header>
-        <main className="mt-20 px-5 py-5 bg-white md:mt-0 md:px-12">
+        <main className="mt-20 md:mt-0 px-5 md:px-12 py-5 lg:py-1 2xl:py-5 bg-white">
           {children}
         </main>
       </div>

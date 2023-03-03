@@ -70,7 +70,7 @@ const DashboardMember = () => {
 
   return (
     <div className="w-full h-full font-poppins">
-      <div className="grid grid-cols-1 gap-5 drop-shadow rounded-md overflow-hidden mb-10 md:grid-cols-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 drop-shadow rounded-md overflow-hidden mb-10 lg:mb-5 2xl:mb-10">
         {cardMenu.map((value, index) => (
           <CustomCard
             key={index}
@@ -82,12 +82,12 @@ const DashboardMember = () => {
       </div>
       <div>
         <div className="flex justify-end md:justify-start flex-wrap space-y-3 md:space-y-0 items-center space-x-5 mb-5">
-          <label className="flex items-center space-x-2 border-2 py-2 px-3 w-full md:w-[30%] rounded-md">
+          <label className="flex items-center space-x-2 border-2 py-2 lg:py-1 2xl:py-2 px-3 w-full lg:w-[40%] 2xl:w-[30%] rounded-md">
             <span className="text-xl text-indigo-500">
               <AiOutlineSearch />
             </span>
             <input
-              className="w-full outline-none"
+              className="w-full outline-none lg:placeholder:text-sm 2xl:placeholder:text-base"
               type="search"
               name="search"
               placeholder="Search"
@@ -99,7 +99,7 @@ const DashboardMember = () => {
           <div className="flex space-x-3">
             <CustomDropdown
               className={
-                "text-indigo-500 font-bold bg-white hover:text-indigo-600 text-sm px-4 py-2.5 text-center inline-flex items-center"
+                "text-indigo-500 font-bold bg-white hover:text-indigo-600 text-sm lg:text-xs 2xl:text-sm px-4 py-2.5 lg:py-2 2xl:py-2.5 text-center inline-flex items-center"
               }
               title={"Sort"}
             >
@@ -118,7 +118,7 @@ const DashboardMember = () => {
             </CustomDropdown>
             <CustomDropdown
               className={
-                "text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-400 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
+                "text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-400 font-medium rounded-lg text-sm lg:text-xs 2xl:text-sm px-4 py-2.5 lg:py-2 2xl:py-2.5 text-center inline-flex items-center"
               }
               title={"Limit"}
             >
@@ -143,31 +143,31 @@ const DashboardMember = () => {
               <tr className="text-[#595959]">
                 <th
                   scope="col"
-                  className="px-6 py-4 w-[30%] text-left text-xs uppercase tracking-wider"
+                  className="px-6 py-4 lg:py-3 2xl:py-4 w-[30%] text-left text-xs uppercase tracking-wider"
                 >
                   Name
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-4 w-[25%] text-left text-xs uppercase tracking-wider"
+                  className="px-6 py-4 lg:py-3 2xl:py-4 w-[25%] text-left text-xs uppercase tracking-wider"
                 >
                   Email
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-4 text-left text-xs uppercase tracking-wider"
+                  className="px-6 py-4 lg:py-3 2xl:py-4 text-left text-xs uppercase tracking-wider"
                 >
                   Status
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-4 text-left text-xs uppercase tracking-wider"
+                  className="px-6 py-4 lg:py-3 2xl:py-4 text-left text-xs uppercase tracking-wider"
                 >
                   Role
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-4 text-left text-xs uppercase tracking-wider"
+                  className="px-6 py-4 lg:py-3 2xl:py-4 text-left text-xs uppercase tracking-wider"
                 >
                   Action
                 </th>
@@ -175,27 +175,29 @@ const DashboardMember = () => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {members.length < 1 ? (
-                <tr>
-                  <td className="py-6 text-end w-[55%] text-xl text-gray-600">Member not found</td>
+                <tr className="relative w-full">
+                  <td className="py-10 text-xl text-gray-600">
+                    <p className="absolute left-[30%] lg:left-[40%] top-7">Member not found</p>
+                  </td>
                 </tr>
               ) : (
                 members.map((value, index) => (
-                  <tr key={index} className="text-[#595959]">
-                    <td className="px-6 py-3 whitespace-nowrap">
+                  <tr key={index} className="text-[#595959] lg:text-sm 2xl:text-base">
+                    <td className="px-6 py-3 lg:py-2 2xl:py-3 whitespace-nowrap">
                       {value.name}
                     </td>
-                    <td className="px-6 py-3 whitespace-nowrap">
+                    <td className="px-6 py-3 lg:py-2 2xl:py-3 whitespace-nowrap">
                       {value.email}
                     </td>
-                    <td className="px-6 py-3 whitespace-nowrap">
+                    <td className="px-6 py-3 lg:py-2 2xl:py-3 whitespace-nowrap">
                       <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                         Active
                       </span>
                     </td>
-                    <td className="px-6 py-3 whitespace-nowrap">
+                    <td className="px-6 py-3 lg:py-2 2xl:py-3 whitespace-nowrap">
                       {value.role}
                     </td>
-                    <td className="px-6 py-3 whitespace-nowrap flex space-x-5">
+                    <td className="px-6 py-3 lg:py-2 2xl:py-3 whitespace-nowrap flex space-x-5">
                       <span className="text-lg text-indigo-500">
                         <FiEdit />
                       </span>
@@ -208,7 +210,7 @@ const DashboardMember = () => {
               )}
               {members.length > 0 && (
                 <tr className="relative">
-                  <td className="py-7">
+                  <td className="py-7 lg:py-6 2xl:py-7">
                     <CustomPagination
                       count={totalOfMembers}
                       page={query._page}

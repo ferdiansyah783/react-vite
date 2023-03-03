@@ -65,7 +65,7 @@ const CustomPagination = ({
         <li>
           <button
             className={clsx(
-              "block px-3 py-2 ml-0 leading-tight text-gray-500 bg-gray-50 border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700",
+              "block px-3 lg:px-2 2xl:px-3 py-2 lg:py-1 2xl:py-2 ml-0 leading-tight text-gray-500 bg-gray-50 border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700",
               page === 1 && "bg-gray-100"
             )}
             disabled={page === 1 && true}
@@ -91,7 +91,7 @@ const CustomPagination = ({
           <li key={index}>
             <button
               className={clsx(
-                "px-4 py-2 leading-tight hover:bg-gray-100 hover:text-gray-700",
+                "px-4 lg:px-3 2xl:px-4 py-2 lg:py-1 2xl:py-2 leading-tight hover:bg-gray-100 hover:text-gray-700",
                 page === value ?
                   "active bg-indigo-500 bg-opacity-20 border border-indigo-500 text-indigo-500" : "text-gray-500 bg-white border border-gray-300"
               )}
@@ -104,7 +104,7 @@ const CustomPagination = ({
         <li>
           <button
             className={clsx(
-              "block px-3 py-2 leading-tight text-gray-500 bg-gray-50 border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700",
+              "block px-3 lg:px-2 2xl:px-3 py-2 lg:py-1 2xl:py-2 leading-tight text-gray-500 bg-gray-50 border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700",
               page === lastIndex && "bg-gray-100"
             )}
             disabled={page === lastIndex && true}

@@ -116,7 +116,7 @@ const DashboardMain = () => {
 
   return (
     <div className="w-full h-full font-poppins">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-5 drop-shadow rounded-md overflow-hidden mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 drop-shadow rounded-md overflow-hidden mb-10">
         {cardMenu.map((value, index) => (
           <CustomCard
             key={index}
