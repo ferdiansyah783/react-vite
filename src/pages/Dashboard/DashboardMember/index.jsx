@@ -174,38 +174,52 @@ const DashboardMember = () => {
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {members.map((value, index) => (
-                <tr key={index} className="text-[#595959]">
-                  <td className="px-6 py-3 whitespace-nowrap">{value.name}</td>
-                  <td className="px-6 py-3 whitespace-nowrap">{value.email}</td>
-                  <td className="px-6 py-3 whitespace-nowrap">
-                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                      Active
-                    </span>
-                  </td>
-                  <td className="px-6 py-3 whitespace-nowrap">{value.role}</td>
-                  <td className="px-6 py-3 whitespace-nowrap flex space-x-5">
-                    <span className="text-lg text-indigo-500">
-                      <FiEdit />
-                    </span>
-                    <span className="text-xl text-red-600">
-                      <IoMdRemoveCircleOutline />
-                    </span>
+              {members.length < 1 ? (
+                <tr>
+                  <td className="py-6 text-end w-[55%] text-xl text-gray-600">Member not found</td>
+                </tr>
+              ) : (
+                members.map((value, index) => (
+                  <tr key={index} className="text-[#595959]">
+                    <td className="px-6 py-3 whitespace-nowrap">
+                      {value.name}
+                    </td>
+                    <td className="px-6 py-3 whitespace-nowrap">
+                      {value.email}
+                    </td>
+                    <td className="px-6 py-3 whitespace-nowrap">
+                      <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                        Active
+                      </span>
+                    </td>
+                    <td className="px-6 py-3 whitespace-nowrap">
+                      {value.role}
+                    </td>
+                    <td className="px-6 py-3 whitespace-nowrap flex space-x-5">
+                      <span className="text-lg text-indigo-500">
+                        <FiEdit />
+                      </span>
+                      <span className="text-xl text-red-600">
+                        <IoMdRemoveCircleOutline />
+                      </span>
+                    </td>
+                  </tr>
+                ))
+              )}
+              {members.length > 0 && (
+                <tr className="relative">
+                  <td className="py-7">
+                    <CustomPagination
+                      count={totalOfMembers}
+                      page={query._page}
+                      limit={query._limit}
+                      setCurrentPage={setCurrentPage}
+                      setNextPage={handleNext}
+                      setPrevPage={handlePrev}
+                    />
                   </td>
                 </tr>
-              ))}
-              <tr className="relative">
-                <td className="py-7">
-                  <CustomPagination
-                    count={totalOfMembers}
-                    page={query._page}
-                    limit={query._limit}
-                    setCurrentPage={setCurrentPage}
-                    setNextPage={handleNext}
-                    setPrevPage={handlePrev}
-                  />
-                </td>
-              </tr>
+              )}
             </tbody>
           </table>
         </div>

@@ -200,38 +200,48 @@ const DashboardProduct = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {products.map((value, index) => (
-              <tr key={index} className="text-[#595959]">
-                <td className="px-6 py-3 max-w-xs truncate">{value.name}</td>
-                <td className="px-6 py-3 max-w-xs truncate">{value.stock}</td>
-                <td className="px-6 py-3 max-w-sm truncate">{value.price}</td>
-                <td className="px-6 py-3 max-w-md truncate">
-                  <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                    Ordered
-                  </span>
-                </td>
-                <td className="px-6 py-3 max-w-sm truncate flex space-x-5">
-                  <span className="text-lg text-indigo-500">
-                    <FiEdit />
-                  </span>
-                  <span className="text-xl text-red-600">
-                    <IoMdRemoveCircleOutline />
-                  </span>
+            {products.length < 1 ? (
+              <tr>
+                <td className="py-6 text-end w-[55%] text-xl text-gray-600">
+                  Product not found
                 </td>
               </tr>
-            ))}
-            <tr className="relative">
-              <td className="py-7">
-                <CustomPagination
-                  count={totalOfProducts}
-                  page={query._page}
-                  limit={query._limit}
-                  setCurrentPage={setCurrentPage}
-                  setNextPage={handleNext}
-                  setPrevPage={handlePrev}
-                />
-              </td>
-            </tr>
+            ) : (
+              products.map((value, index) => (
+                <tr key={index} className="text-[#595959]">
+                  <td className="px-6 py-3 max-w-xs truncate">{value.name}</td>
+                  <td className="px-6 py-3 max-w-xs truncate">{value.stock}</td>
+                  <td className="px-6 py-3 max-w-sm truncate">{value.price}</td>
+                  <td className="px-6 py-3 max-w-md truncate">
+                    <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                      Ordered
+                    </span>
+                  </td>
+                  <td className="px-6 py-3 max-w-sm truncate flex space-x-5">
+                    <span className="text-lg text-indigo-500">
+                      <FiEdit />
+                    </span>
+                    <span className="text-xl text-red-600">
+                      <IoMdRemoveCircleOutline />
+                    </span>
+                  </td>
+                </tr>
+              ))
+            )}
+            {products.length > 0 && (
+              <tr className="relative">
+                <td className="py-7">
+                  <CustomPagination
+                    count={totalOfProducts}
+                    page={query._page}
+                    limit={query._limit}
+                    setCurrentPage={setCurrentPage}
+                    setNextPage={handleNext}
+                    setPrevPage={handlePrev}
+                  />
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
