@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
-import AuthLayout from "../../components/AuthLayout";
-import { AiFillEye } from "react-icons/ai";
 import clsx from "clsx";
-import authApi from "../../api/authApi";
-import { validate } from "../../utils/validation";
-import CustomAlert from "../../components/CustomAlert";
+import React, { useRef, useState } from "react";
+import { AiFillEye } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import authApi from "../../api/authApi";
+import AuthLayout from "../../components/AuthLayout";
+import CustomAlert from "../../components/CustomAlert";
+import { validate } from "../../utils/validation";
 
 const Login = () => {
   const [fieldsLogin, setFieldsLogin] = useState({
@@ -46,7 +46,7 @@ const Login = () => {
         localStorage.setItem("token", access_token);
         setIsOpenAlert({ ...isOpenAlert, success: true });
         setTimeout(() => {
-          navigate("/dashboard");
+          navigate("/backstore");
         }, 2000);
       })
       .catch((error) => {

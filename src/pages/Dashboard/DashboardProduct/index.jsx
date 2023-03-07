@@ -211,7 +211,7 @@ const DashboardProduct = () => {
                 <tr key={index} className="text-[#595959] lg:text-sm 2xl:text-base">
                   <td className="px-6 py-3 lg:py-2 2xl:py-3 max-w-xs truncate">{value.name}</td>
                   <td className="px-6 py-3 lg:py-2 2xl:py-3 max-w-xs truncate">{value.stock}</td>
-                  <td className="px-6 py-3 lg:py-2 2xl:py-3 max-w-sm truncate">{value.price}</td>
+                  <td className="px-6 py-3 lg:py-2 2xl:py-3 max-w-sm truncate"><b>Rp.</b>{value.price}</td>
                   <td className="px-6 py-3 lg:py-2 2xl:py-3 max-w-md truncate">
                     <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
                       Ordered

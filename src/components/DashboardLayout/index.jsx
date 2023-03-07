@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineBarChart } from "react-icons/ai";
 import { BsCart4, BsChevronDown } from "react-icons/bs";
 import { HiOutlineUserCircle } from "react-icons/hi";
@@ -10,6 +10,7 @@ import authApi from "../../api/authApi";
 import CustomAlert from "../CustomAlert";
 import CustomModal from "../CustomModal";
 import OptionsMenu from "../OptionsMenu";
+import profileApi from "../../api/profileApi";
 
 const DashboardLayout = ({ children }) => {
   const [activeSide, setActiveSide] = useState(window.location.pathname);
@@ -18,8 +19,34 @@ const DashboardLayout = ({ children }) => {
   const [isOpenLogout, setIsOpenLogout] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
+  const [profile, setProfile] = useState({
+    name: "",
+    email: "",
+    path: "",
+  });
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem("token")) return navigate("/signin");
+
+    document.title = "Back Store"
+
+    authApi.setHeader();
+
+    profileApi
+      .getProfile()
+      .then((result) => {
+        if (result.status !== 200) return;
+
+        setProfile({
+          ...profile,
+          name: result.data?.name,
+          email: result.data?.email,
+        });
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const handleSide = (link) => {
     setActiveSide(link);
@@ -29,18 +56,18 @@ const DashboardLayout = ({ children }) => {
   const sideMenu = [
     {
       logo: <AiOutlineBarChart />,
-      value: "Dashboard",
-      link: "/dashboard",
+      value: "Get started",
+      link: "/backstore",
     },
     {
       logo: <HiOutlineUserCircle />,
       value: "Members",
-      link: "/dashboard/member",
+      link: "/backstore/member",
     },
     {
       logo: <BsCart4 />,
       value: "Products",
-      link: "/dashboard/product",
+      link: "/backstore/product",
     },
   ];
 
@@ -91,7 +118,9 @@ const DashboardLayout = ({ children }) => {
       >
         <div className="px-5 py-7 hidden md:flex items-center space-x-3">
           <RxDashboard className="text-2xl lg:text-xl 2xl:text-2xl text-indigo-600" />
-          <h1 className="text-2xl lg:text-xl 2xl:text-2xl font-extrabold text-[#141414]">Dashboard</h1>
+          <h1 className="text-2xl lg:text-xl 2xl:text-2xl font-extrabold text-[#141414]">
+            Dashboard
+          </h1>
         </div>
         <ul className="space-y-1 pt-20 md:pt-0">
           {sideMenu.map((value, index) => (
@@ -121,7 +150,10 @@ const DashboardLayout = ({ children }) => {
                   <RxHamburgerMenu className="text-2xl mt-1 md:hidden" />
                 </button>
                 <h1 className="text-lg lg:text-md 2xl:text-2xl font-semibold font-varela">
-                  Welcome Admin<span className="text-3xl lg:text-2xl 2xl:text-3xl">&#x270B;</span>
+                  Welcome {profile.name}
+                  <span className="text-3xl lg:text-2xl 2xl:text-3xl">
+                    &#x270B;
+                  </span>
                 </h1>
               </div>
               <p className="hidden text-base lg:text-sm 2xl:text-base font-poppins text-[#595959] md:block">
@@ -133,7 +165,7 @@ const DashboardLayout = ({ children }) => {
                 <MdOutlineNotificationsActive className="text-md lg:text-xl 2xl:text-2xl text-indigo-500" />
               </div>
               <button
-              className="flex items-center space-x-1"
+                className="flex items-center space-x-1"
                 onClick={() => {
                   setIsOpenOption((isOpenOption) => !isOpenOption);
                   setTimeout(() => {
@@ -146,7 +178,12 @@ const DashboardLayout = ({ children }) => {
                   src="https://source.unsplash.com/360x360?people"
                   alt="people"
                 />
-                <BsChevronDown className={clsx("text-sm md:text-base transition-all duration-300 ease-in-out", isOpenOption && "rotate-180")} />
+                <BsChevronDown
+                  className={clsx(
+                    "text-sm md:text-base transition-all duration-300 ease-in-out",
+                    isOpenOption && "rotate-180"
+                  )}
+                />
               </button>
             </div>
           </div>

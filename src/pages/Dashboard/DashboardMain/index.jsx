@@ -95,12 +95,12 @@ const DashboardMain = () => {
     {
       logo: <AiOutlineDollarCircle />,
       title: "Total Profite",
-      value: "2,500,00",
+      value: "Rp.2,500,00",
     },
     {
       logo: <AiOutlineTransaction />,
       title: "Total Expenses",
-      value: "1,500,00",
+      value: "Rp.1,500,00",
     },
     {
       logo: <HiOutlineUserGroup />,

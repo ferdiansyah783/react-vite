@@ -14,7 +14,7 @@ const App = () => {
         <Routes>
           <Route exact path="/signin" element={<Login />} />
           <Route exact path="/signup" element={<Register />} />
-          <Route exact path="/dashboard/*" element={<Dashboard />} />
+          <Route exact path="/backstore/*" element={<Dashboard />} />
           <Route exact path="/" element={<h1>iindex</h1>} />
         </Routes>
       </BrowserRouter>
