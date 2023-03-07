@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { AiOutlineDollarCircle, AiOutlineTransaction } from "react-icons/ai";
-import { HiOutlineUserGroup } from "react-icons/hi";
-import { TbShoppingCart } from "react-icons/tb";
-import CustomCard from "../../../components/CustomCard";
-import CustomChart from "../../../components/CustomChart";
 import { useNavigate } from "react-router-dom";
 import authApi from "../../../api/authApi";
-import userApi from "../../../api/userApi";
 import productApi from "../../../api/productApi";
+import userApi from "../../../api/userApi";
+import totalExpensesIcon from "../../../assets/images/Total_expenses.svg";
+import totalMemberIcon from "../../../assets/images/Total_member.svg";
+import totalProductIcon from "../../../assets/images/Total_product.svg";
+import totalProfiteIcon from "../../../assets/images/Total_profite.svg";
+import CustomCard from "../../../components/CustomCard";
 
 const DashboardMain = () => {
   const [totalOfMembers, setTotalOfMembers] = useState(0);
@@ -93,23 +93,23 @@ const DashboardMain = () => {
 
   const cardMenu = [
     {
-      logo: <AiOutlineDollarCircle />,
+      logo: totalProfiteIcon,
       title: "Total Profite",
       value: "Rp.2,500,00",
     },
     {
-      logo: <AiOutlineTransaction />,
+      logo: totalExpensesIcon,
       title: "Total Expenses",
       value: "Rp.1,500,00",
     },
     {
-      logo: <HiOutlineUserGroup />,
-      title: "Total Member",
+      logo: totalMemberIcon,
+      title: "Total Members",
       value: totalOfMembers,
     },
     {
-      logo: <TbShoppingCart />,
-      title: "Total Product",
+      logo: totalProductIcon,
+      title: "Total Products",
       value: totalOfProducts,
     },
   ];

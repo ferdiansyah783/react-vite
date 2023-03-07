@@ -1,16 +1,18 @@
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
 import { AiOutlineBarChart } from "react-icons/ai";
-import { BsCart4, BsChevronDown } from "react-icons/bs";
+import { BsCart4 } from "react-icons/bs";
 import { HiOutlineUserCircle } from "react-icons/hi";
-import { MdOutlineNotificationsActive } from "react-icons/md";
-import { RxDashboard, RxHamburgerMenu } from "react-icons/rx";
+import { RxHamburgerMenu } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 import authApi from "../../api/authApi";
+import profileApi from "../../api/profileApi";
+import eidtProfileIcon from "../../assets/images/Edit_profile.svg";
+import notifIcon from "../../assets/images/Notification.svg";
+import signOutIcon from "../../assets/images/Sign_out_squre.svg";
 import CustomAlert from "../CustomAlert";
 import CustomModal from "../CustomModal";
 import OptionsMenu from "../OptionsMenu";
-import profileApi from "../../api/profileApi";
 
 const DashboardLayout = ({ children }) => {
   const [activeSide, setActiveSide] = useState(window.location.pathname);
@@ -30,7 +32,7 @@ const DashboardLayout = ({ children }) => {
   useEffect(() => {
     if (!localStorage.getItem("token")) return navigate("/signin");
 
-    document.title = "Back Store"
+    document.title = "Back Store";
 
     authApi.setHeader();
 
@@ -116,8 +118,7 @@ const DashboardLayout = ({ children }) => {
           isOpenSidebar === true ? "-left-0" : "-left-60 md:-left-0"
         )}
       >
-        <div className="px-5 py-7 hidden md:flex items-center space-x-3">
-          <RxDashboard className="text-2xl lg:text-xl 2xl:text-2xl text-indigo-600" />
+        <div className="px-5 py-7 hidden md:flex justify-center items-center space-x-3">
           <h1 className="text-2xl lg:text-xl 2xl:text-2xl font-extrabold text-[#141414]">
             Dashboard
           </h1>
@@ -128,7 +129,7 @@ const DashboardLayout = ({ children }) => {
               <button
                 onClick={() => handleSide(value.link)}
                 className={clsx(
-                  "py-2 2xl:py-3 px-3 w-full flex items-center space-x-3 rounded-lg",
+                  "py-2 2xl:py-3 px-3 w-full flex items-center space-x-3 rounded-xl",
                   activeSide === value.link
                     ? "active bg-indigo-600 text-white"
                     : "hover:bg-indigo-600 hover:bg-opacity-5"
@@ -161,9 +162,19 @@ const DashboardLayout = ({ children }) => {
               </p>
             </div>
             <div className="absolute -right-7 flex items-center space-x-2 md:space-x-4 md:right-0 md:relative">
-              <div className="p-2 bg-slate-100 rounded-full">
-                <MdOutlineNotificationsActive className="text-md lg:text-xl 2xl:text-2xl text-indigo-500" />
-              </div>
+              <button>
+                <img src={notifIcon} alt="notif icon" className="w-6 h-6" />
+              </button>
+              <button>
+                <img
+                  src={eidtProfileIcon}
+                  alt="edit-profile icon"
+                  className="w-6 h-6"
+                />
+              </button>
+              <button>
+                <img src={signOutIcon} alt="signout icon" className="w-6 h-6" />
+              </button>
               <button
                 className="flex items-center space-x-1"
                 onClick={() => {
@@ -174,15 +185,9 @@ const DashboardLayout = ({ children }) => {
                 }}
               >
                 <img
-                  className="rounded-full w-7 lg:w-8 2xl:w-10 h-7 lg:h-8 2xl:h-10 cursor-pointer"
+                  className="rounded-full w-7 lg:w-8 2xl:w-[45px] h-7 lg:h-8 2xl:h-[45px] cursor-pointer"
                   src="https://source.unsplash.com/360x360?people"
                   alt="people"
-                />
-                <BsChevronDown
-                  className={clsx(
-                    "text-sm md:text-base transition-all duration-300 ease-in-out",
-                    isOpenOption && "rotate-180"
-                  )}
                 />
               </button>
             </div>

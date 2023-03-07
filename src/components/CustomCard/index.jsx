@@ -1,17 +1,17 @@
 import React from "react";
 
-const CustomCard = ({logo, title, value}) => {
+const CustomCard = ({ logo, title, value }) => {
   return (
-    <div className="h-36 lg:h-[115px] 2xl:h-36 relative bg-white rounded-md">
-      <div className="flex p-5 lg:p-3 2xl:p-5">
-        <h1 className="text-sm lg:text-xs 2xl:text-sm text-indigo-700 bg-indigo-400 bg-opacity-20 py-1 px-2 rounded-lg flex items-center">
-          <span className="text-md lg:text-sm 2xl:text-md mr-1">{logo}</span>
-          {title}
-        </h1>
+    <div className="h-36 lg:h-[115px] 2xl:h-28 relative bg-white rounded-md font-poppins">
+      <div className="w-full h-full flex p-5 lg:p-3 2xl:p-4 space-x-5">
+        <div className="w-[25%] h-full flex justify-center items-center bg-[#4F46E533] rounded-xl">
+          <img src={logo} alt="icon" className="w-14 h-14" />
+        </div>
+        <div className="space-y-4">
+          <h2 className="text-lg text-[#00000080]">{title}</h2>
+          <h1 className="text-2xl font-extrabold">{value}</h1>
+        </div>
       </div>
-      <h1 className="absolute bottom-5 lg:bottom-2 2xl:bottom-5 left-6 lg:left-4 2xl:left-6 text-xl lg:text-lg 2xl:text-xl text-[#595959] font-semibold">
-        {value}
-      </h1>
     </div>
   );
 };

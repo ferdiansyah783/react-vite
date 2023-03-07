@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { FiEdit, FiUser, FiUserCheck } from "react-icons/fi";
+import { FiEdit } from "react-icons/fi";
 import { IoMdRemoveCircleOutline } from "react-icons/io";
-import { RiShieldUserLine } from "react-icons/ri";
+import authApi from "../../../api/authApi";
+import userApi from "../../../api/userApi";
+import totalGoldMemberIcon from "../../../assets/images/Total_gold_member.svg";
+import totalMemberIcon from "../../../assets/images/Total_member.svg";
+import totalSilverMemberIcon from "../../../assets/images/Total_silver_member.svg";
+import searchIcon from "../../../assets/images/Search_alt.svg";
 import CustomCard from "../../../components/CustomCard";
 import CustomDropdown from "../../../components/CustomDropdown";
 import CustomPagination from "../../../components/CustomPagination";
-import userApi from "../../../api/userApi";
-import authApi from "../../../api/authApi";
 import { queryBuild } from "../../../utils/queryBuilder";
 
 const DashboardMember = () => {
@@ -52,17 +55,17 @@ const DashboardMember = () => {
 
   const cardMenu = [
     {
-      logo: <RiShieldUserLine />,
+      logo: totalMemberIcon,
       title: "Members",
       value: totalOfMembers,
     },
     {
-      logo: <FiUserCheck />,
+      logo: totalGoldMemberIcon,
       title: "Gold",
       value: "1,500,00",
     },
     {
-      logo: <FiUser />,
+      logo: totalSilverMemberIcon,
       title: "Silver",
       value: "300,00",
     },
@@ -70,7 +73,7 @@ const DashboardMember = () => {
 
   return (
     <div className="w-full h-full font-poppins">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 drop-shadow rounded-md overflow-hidden mb-10 lg:mb-5 2xl:mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 drop-shadow rounded-md overflow-hidden mb-10 lg:mb-5 2xl:mb-8">
         {cardMenu.map((value, index) => (
           <CustomCard
             key={index}
@@ -82,15 +85,15 @@ const DashboardMember = () => {
       </div>
       <div>
         <div className="flex justify-end md:justify-start flex-wrap space-y-3 md:space-y-0 items-center space-x-5 mb-5">
-          <label className="flex items-center space-x-2 border-2 py-2 lg:py-1 2xl:py-2 px-3 w-full lg:w-[40%] 2xl:w-[30%] rounded-md">
+          <label className="flex items-center space-x-2 bg-white drop-shadow py-2 lg:py-1 2xl:py-[9px] px-4 w-full lg:w-[40%] 2xl:w-[30%] rounded-lg">
             <span className="text-xl text-indigo-500">
-              <AiOutlineSearch />
+              <img src={searchIcon} alt="search icon" className="w-7 h-7" />
             </span>
             <input
-              className="w-full outline-none lg:placeholder:text-sm 2xl:placeholder:text-base"
+              className="w-full outline-none lg:placeholder:text-sm"
               type="search"
               name="search"
-              placeholder="Search"
+              placeholder="Search..."
               onChange={(e) =>
                 setQuery({ ...query, _page: 1, q: e.target.value })
               }
@@ -99,9 +102,9 @@ const DashboardMember = () => {
           <div className="flex space-x-3">
             <CustomDropdown
               className={
-                "text-indigo-500 font-bold bg-white hover:text-indigo-600 text-sm lg:text-xs 2xl:text-sm px-4 py-2.5 lg:py-2 2xl:py-2.5 text-center inline-flex items-center"
+                "text-indigo-500 font-bold bg-white drop-shadow rounded-lg hover:text-indigo-600 text-sm lg:text-xs 2xl:text-sm px-5 py-2.5 lg:py-2 2xl:py-3 text-center inline-flex items-center"
               }
-              title={"Sort"}
+              title={"Sort by"}
             >
               <ul className="py-2 text-sm text-gray-700">
                 {["name", "email"].map((value, index) => (
@@ -118,9 +121,9 @@ const DashboardMember = () => {
             </CustomDropdown>
             <CustomDropdown
               className={
-                "text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-indigo-400 font-medium rounded-lg text-sm lg:text-xs 2xl:text-sm px-4 py-2.5 lg:py-2 2xl:py-2.5 text-center inline-flex items-center"
+                "text-indigo-500 font-bold bg-white drop-shadow rounded-lg hover:text-indigo-600 text-sm lg:text-xs 2xl:text-sm px-5 py-2.5 lg:py-2 2xl:py-3 text-center inline-flex items-center"
               }
-              title={"Limit"}
+              title={"Limit per"}
             >
               <ul className="py-2 text-sm text-gray-700">
                 {[2, 5, 10].map((value, index) => (
