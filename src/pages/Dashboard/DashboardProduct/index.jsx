@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { BsCart, BsCart4, BsCartCheck, BsCartX } from "react-icons/bs";
-import CustomCard from "../../../components/CustomCard";
-import clsx from "clsx";
-import CustomPagination from "../../../components/CustomPagination";
-import { IoMdRemoveCircleOutline } from "react-icons/io";
-import { AiOutlineSearch } from "react-icons/ai";
+import React, { useEffect, useState } from "react";
 import { FiEdit } from "react-icons/fi";
-import productApi from "../../../api/productApi";
+import { IoMdRemoveCircleOutline } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 import authApi from "../../../api/authApi";
-import { queryBuild } from "../../../utils/queryBuilder";
+import productApi from "../../../api/productApi";
+import totalProductCanceledIcon from "../../../assets/images/Product_canceled.svg";
+import totalProductCompletedIcon from "../../../assets/images/Product_complete.svg";
+import totalProductOrderedIcon from "../../../assets/images/Product_ordered.svg";
+import totalProductIcon from "../../../assets/images/Total_product.svg";
+import CustomCard from "../../../components/CustomCard";
 import CustomDropdown from "../../../components/CustomDropdown";
+import CustomPagination from "../../../components/CustomPagination";
+import CustomSearch from "../../../components/CustomSearch";
+import { queryBuild } from "../../../utils/queryBuilder";
 
 const DashboardProduct = () => {
   const [activeNav, setActiveNav] = useState(0);
@@ -21,6 +24,8 @@ const DashboardProduct = () => {
     _sort: "",
     q: "",
   });
+
+  const navigate = useNavigate(null);
 
   const queryBuilder = queryBuild(query);
 
@@ -52,24 +57,28 @@ const DashboardProduct = () => {
     setQuery({ ...query, _page: query._page + 1 });
   };
 
+  const handleSearch = (e) => {
+    setQuery({ ...query, _page: 1, q: e.target.value });
+  };
+
   const cardMenu = [
     {
-      logo: <BsCart4 />,
+      logo: totalProductIcon,
       title: "Products",
       value: totalOfProducts,
     },
     {
-      logo: <BsCart />,
+      logo: totalProductOrderedIcon,
       title: "Ordered",
       value: "1,500,00",
     },
     {
-      logo: <BsCartCheck />,
+      logo: totalProductCompletedIcon,
       title: "Completed",
       value: "300,00",
     },
     {
-      logo: <BsCartX />,
+      logo: totalProductCanceledIcon,
       title: "Canceled",
       value: "120,00",
     },
@@ -87,47 +96,23 @@ const DashboardProduct = () => {
           />
         ))}
       </div>
-      <div className="w-full space-y-5 md:space-y-0 md:flex justify-between items-center py-3 md:py-0 mb-2 md:mb-5">
-        <ul className="flex space-x-3 font-bold text-[#595959] md:space-x-5">
-          {["Products", "Ordered", "Completed", "Canceled"].map(
-            (value, index) => (
-              <li
-                key={index}
-                className={clsx(activeNav === index && "text-indigo-500")}
-              >
-                <button onClick={() => setActiveNav(index)}>
-                  <p className="lg:text-sm 2xl:text-base">{value}</p>
-                  <div
-                    className={clsx(
-                      "h-[2px] transition duration-300 ease-in-out scale-x-0 rounded-full",
-                      activeNav === index && "bg-indigo-500 scale-x-100"
-                    )}
-                  ></div>
-                </button>
-              </li>
-            )
-          )}
-        </ul>
+      <div className="w-full space-y-5 md:space-y-0 md:flex justify-between items-center py-3 md:py-0 mb-2 md:mb-5 lg:mb-3">
+        <CustomDropdown
+          className={
+            "text-indigo-500 hover:text-indigo-600 px-1 font-semibold text-xl lg:text-base 2xl:text-lg text-center inline-flex items-center"
+          }
+          title={"Product"}
+        />
         <div className="flex justify-end md:justify-start flex-wrap space-y-3 md:space-y-0 items-center space-x-3">
-          <label className="flex items-center space-x-2 w-full md:w-96 lg:w-72 2xl:w-96 border-2 py-2 lg:py-1 2xl:py-2 px-3 rounded-md">
-            <span className="text-xl text-indigo-500">
-              <AiOutlineSearch />
-            </span>
-            <input
-              className="w-full outline-none lg:placeholder:text-sm 2xl:placeholder:text-base"
-              type="search"
-              name="search"
-              placeholder="Search"
-              onChange={(e) =>
-                setQuery({ ...query, _page: 1, q: e.target.value })
-              }
-            />
-          </label>
+          <CustomSearch
+            width={"w-full md:w-[310px] lg:w-72 2xl:w-[450px]"}
+            setQuery={handleSearch}
+          />
           <CustomDropdown
             className={
-              "text-indigo-500 font-bold bg-white hover:text-indigo-600 text-sm lg:text-xs 2xl:text-sm px-4 py-2.5 lg:py-2 2xl:py-2.5 text-center inline-flex items-center"
+              "text-indigo-500 font-bold bg-white drop-shadow rounded-lg hover:text-indigo-600 text-sm lg:text-xs 2xl:text-sm px-5 py-2.5 lg:py-2 2xl:py-3 text-center inline-flex items-center"
             }
-            title={"Sort"}
+            title={"Sort by"}
           >
             <ul className="py-2 text-sm text-gray-700">
               {["name", "stock", "price"].map((value, index) => (
@@ -144,15 +129,17 @@ const DashboardProduct = () => {
           </CustomDropdown>
           <CustomDropdown
             className={
-              "text-white font-bold bg-indigo-500 hover:bg-indigo-600 rounded-lg text-sm lg:text-xs 2xl:text-sm px-4 py-2.5 lg:py-2 xl:py-2.5 text-center inline-flex items-center"
+              "text-indigo-500 font-bold bg-white drop-shadow rounded-lg hover:text-indigo-600 text-sm lg:text-xs 2xl:text-sm px-5 py-2.5 lg:py-2 2xl:py-3 text-center inline-flex items-center"
             }
-            title={"Limit"}
+            title={"Limit per"}
           >
             <ul className="py-2 text-sm text-gray-700">
               {[2, 5, 10].map((value, index) => (
                 <li key={index}>
                   <button
-                    onClick={() => setQuery({ ...query, _limit: value })}
+                    onClick={() =>
+                      setQuery({ ...query, _limit: value, _page: 1 })
+                    }
                     className="w-full text-start px-4 py-2 hover:bg-gray-100"
                   >
                     {value}
@@ -208,10 +195,20 @@ const DashboardProduct = () => {
               </tr>
             ) : (
               products.map((value, index) => (
-                <tr key={index} className="text-[#595959] lg:text-sm 2xl:text-base">
-                  <td className="px-6 py-3 lg:py-2 2xl:py-3 max-w-xs truncate">{value.name}</td>
-                  <td className="px-6 py-3 lg:py-2 2xl:py-3 max-w-xs truncate">{value.stock}</td>
-                  <td className="px-6 py-3 lg:py-2 2xl:py-3 max-w-sm truncate"><b>Rp.</b>{value.price}</td>
+                <tr
+                  key={index}
+                  className="text-[#595959] lg:text-sm 2xl:text-base"
+                >
+                  <td className="px-6 py-3 lg:py-2 2xl:py-3 max-w-xs truncate">
+                    {value.name}
+                  </td>
+                  <td className="px-6 py-3 lg:py-2 2xl:py-3 max-w-xs truncate">
+                    {value.stock}
+                  </td>
+                  <td className="px-6 py-3 lg:py-2 2xl:py-3 max-w-sm truncate">
+                    <b>Rp.</b>
+                    {value.price}
+                  </td>
                   <td className="px-6 py-3 lg:py-2 2xl:py-3 max-w-md truncate">
                     <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
                       Ordered
@@ -240,6 +237,10 @@ const DashboardProduct = () => {
                     setPrevPage={handlePrev}
                   />
                 </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
             )}
           </tbody>

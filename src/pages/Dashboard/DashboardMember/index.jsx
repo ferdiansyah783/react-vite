@@ -7,11 +7,12 @@ import userApi from "../../../api/userApi";
 import totalGoldMemberIcon from "../../../assets/images/Total_gold_member.svg";
 import totalMemberIcon from "../../../assets/images/Total_member.svg";
 import totalSilverMemberIcon from "../../../assets/images/Total_silver_member.svg";
-import searchIcon from "../../../assets/images/Search_alt.svg";
 import CustomCard from "../../../components/CustomCard";
 import CustomDropdown from "../../../components/CustomDropdown";
 import CustomPagination from "../../../components/CustomPagination";
 import { queryBuild } from "../../../utils/queryBuilder";
+import CustomSearch from "../../../components/CustomSearch";
+import { useNavigate } from "react-router-dom";
 
 const DashboardMember = () => {
   const [totalOfMembers, setTotalOfMembers] = useState(0);
@@ -22,6 +23,8 @@ const DashboardMember = () => {
     _sort: "",
     q: "",
   });
+
+  const navigate = useNavigate(null);
 
   const queryBuilder = queryBuild(query);
 
@@ -51,6 +54,10 @@ const DashboardMember = () => {
 
   const handleNext = () => {
     setQuery({ ...query, _page: query._page + 1 });
+  };
+
+  const handleSearch = (e) => {
+    setQuery({ ...query, _page: 1, q: e.target.value });
   };
 
   const cardMenu = [
@@ -85,20 +92,10 @@ const DashboardMember = () => {
       </div>
       <div>
         <div className="flex justify-end md:justify-start flex-wrap space-y-3 md:space-y-0 items-center space-x-5 mb-5">
-          <label className="flex items-center space-x-2 bg-white drop-shadow py-2 lg:py-1 2xl:py-[9px] px-4 w-full lg:w-[40%] 2xl:w-[30%] rounded-lg">
-            <span className="text-xl text-indigo-500">
-              <img src={searchIcon} alt="search icon" className="w-7 h-7" />
-            </span>
-            <input
-              className="w-full outline-none lg:placeholder:text-sm"
-              type="search"
-              name="search"
-              placeholder="Search..."
-              onChange={(e) =>
-                setQuery({ ...query, _page: 1, q: e.target.value })
-              }
-            />
-          </label>
+          <CustomSearch
+            width={"w-full md:w-[61%] lg:w-[40%] 2xl:w-[30%]"}
+            setQuery={handleSearch}
+          />
           <div className="flex space-x-3">
             <CustomDropdown
               className={
@@ -129,7 +126,9 @@ const DashboardMember = () => {
                 {[2, 5, 10].map((value, index) => (
                   <li key={index}>
                     <button
-                      onClick={() => setQuery({ ...query, _limit: value })}
+                      onClick={() =>
+                        setQuery({ ...query, _limit: value, _page: 1 })
+                      }
                       className="w-full text-start px-4 py-2 hover:bg-gray-100"
                     >
                       {value}
@@ -180,12 +179,21 @@ const DashboardMember = () => {
               {members.length < 1 ? (
                 <tr className="relative w-full">
                   <td className="py-10 text-xl text-gray-600">
-                    <p className="absolute left-[30%] lg:left-[40%] top-7">Member not found</p>
+                    <p className="absolute left-[30%] lg:left-[40%] top-7">
+                      Member not found
+                    </p>
                   </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                 </tr>
               ) : (
                 members.map((value, index) => (
-                  <tr key={index} className="text-[#595959] lg:text-sm 2xl:text-base">
+                  <tr
+                    key={index}
+                    className="text-[#595959] lg:text-sm 2xl:text-base"
+                  >
                     <td className="px-6 py-3 lg:py-2 2xl:py-3 whitespace-nowrap">
                       {value.name}
                     </td>
@@ -223,6 +231,10 @@ const DashboardMember = () => {
                       setPrevPage={handlePrev}
                     />
                   </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                 </tr>
               )}
             </tbody>

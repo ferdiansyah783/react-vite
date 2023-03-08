@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AiFillEye } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import authApi from "../../api/authApi";
@@ -21,7 +21,16 @@ const Login = () => {
     failure: false,
   });
 
+  const inputRefs = {
+    email: useRef(null),
+    password: useRef(null),
+  };
+
   const navigate = useNavigate(null);
+
+  useEffect(() => {
+    document.title = "Sign in";
+  }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -57,11 +66,6 @@ const Login = () => {
           setIsOpenAlert({ ...isOpenAlert, failure: false });
         }, 4000);
       });
-  };
-
-  const inputRefs = {
-    email: useRef(null),
-    password: useRef(null),
   };
 
   const inputClick = (value) => {

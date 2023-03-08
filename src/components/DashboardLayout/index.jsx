@@ -90,7 +90,7 @@ const DashboardLayout = ({ children }) => {
   };
 
   return (
-    <div className="h-screen w-full flex relative font-poppins">
+    <div className="h-screen w-full bg-[#F5F5F5] flex relative font-poppins">
       <CustomAlert
         isOpen={isOpenAlert}
         textColor={"text-green-800"}
@@ -114,69 +114,69 @@ const DashboardLayout = ({ children }) => {
       )}
       <nav
         className={clsx(
-          "border-r drop-shadow fixed w-[60%] md:w-[30%] lg:w-[18%] 2xl:w-[14%] h-screen bg-white z-10 transition-all duration-300 ease-in-out md:relative",
-          isOpenSidebar === true ? "-left-0" : "-left-60 md:-left-0"
+          "border-r drop-shadow fixed lg:relative w-[60%] md:w-[40%] lg:w-[20%] 2xl:w-[14%] h-screen bg-white z-10 transition-all duration-300 ease-in-out",
+          isOpenSidebar === true ? "-left-0" : "-left-60 md:-left-80 lg:-left-0"
         )}
       >
-        <div className="px-5 py-7 hidden md:flex justify-center items-center space-x-3">
+        <div className="px-5 py-7 hidden lg:flex justify-center items-center space-x-3">
           <h1 className="text-2xl lg:text-xl 2xl:text-2xl font-extrabold text-[#141414]">
             Dashboard
           </h1>
         </div>
-        <ul className="space-y-1 pt-20 md:pt-0">
+        <ul className="space-y-1 pt-24 md:pt-28 lg:pt-0">
           {sideMenu.map((value, index) => (
             <li key={index} className="px-2">
               <button
                 onClick={() => handleSide(value.link)}
                 className={clsx(
-                  "py-2 2xl:py-3 px-3 w-full flex items-center space-x-3 rounded-xl",
+                  "py-3 md:py-4 2xl:py-3 px-3 w-full flex items-center space-x-3 rounded-xl",
                   activeSide === value.link
                     ? "active bg-indigo-600 text-white"
                     : "hover:bg-indigo-600 hover:bg-opacity-5"
                 )}
               >
-                <span className="text-lg 2xl:text-xl">{value.logo}</span>
-                <span className="text-sm 2xl:text-base">{value.value}</span>
+                <span className="text-lg md:text-2xl lg:text-lg 2xl:text-xl">{value.logo}</span>
+                <span className="text-sm md:text-lg lg:text-sm 2xl:text-base">{value.value}</span>
               </button>
             </li>
           ))}
         </ul>
       </nav>
-      <div className="w-full md:w-[70%] lg:w-[82%] xl:w-[86%]">
-        <header className="fixed z-10 w-full bg-white drop-shadow px-12 py-8 md:py-2 md:relative md:drop-shadow-none">
+      <div className="w-full h-full lg:w-[82%] xl:w-[86%]">
+        <header className="fixed lg:relative z-10 w-full bg-white drop-shadow lg:drop-shadow-none px-12 py-9 md:py-6 lg:py-2">
           <div className="w-full h-full relative flex items-center justify-between">
-            <div className="absolute -left-8 space-y-1 md:relative md:left-0 md:top-0">
-              <div className="flex items-center space-x-3 md:space-x-0">
+            <div className="absolute md:relative -left-8 space-y-1 md:left-0 md:top-0">
+              <div className="flex items-center space-x-5 lg:space-x-0">
                 <button onClick={() => setIsOpenSidebar((prev) => !prev)}>
-                  <RxHamburgerMenu className="text-2xl mt-1 md:hidden" />
+                  <RxHamburgerMenu className="text-4xl mt-1 lg:hidden" />
                 </button>
-                <h1 className="text-lg lg:text-md 2xl:text-2xl font-semibold font-varela">
+                <h1 className="hidden md:block text-lg md:text-2xl lg:text-xl 2xl:text-2xl font-semibold font-varela">
                   Welcome {profile.name}
                   <span className="text-3xl lg:text-2xl 2xl:text-3xl">
                     &#x270B;
                   </span>
                 </h1>
               </div>
-              <p className="hidden text-base lg:text-sm 2xl:text-base font-poppins text-[#595959] md:block">
+              <p className="hidden lg:block text-base lg:text-sm 2xl:text-base font-poppins text-[#595959">
                 Here's what's hapening in your workpace
               </p>
             </div>
-            <div className="absolute -right-7 flex items-center space-x-2 md:space-x-4 md:right-0 md:relative">
+            <div className="absolute -right-7 flex items-center space-x-1 md:space-x-5 md:right-0 md:relative">
               <button>
-                <img src={notifIcon} alt="notif icon" className="w-6 h-6" />
+                <img src={notifIcon} alt="notif icon" className="w-7 md:w-8 lg:w-5 2xl:w-6 h-7 md:h-8 lg:h-5 2xl:h-6" />
               </button>
               <button>
                 <img
                   src={eidtProfileIcon}
                   alt="edit-profile icon"
-                  className="w-6 h-6"
+                  className="hidden md:block w-6 md:w-8 lg:w-5 2xl:w-6 h-6 md:h-8 lg:h-5 2xl:h-6"
                 />
               </button>
               <button>
-                <img src={signOutIcon} alt="signout icon" className="w-6 h-6" />
+                <img src={signOutIcon} alt="signout icon" className="hidden md:block w-6 md:w-8 lg:w-5 2xl:w-6 h-6 md:h-8 lg:h-5 2xl:h-6" />
               </button>
               <button
-                className="flex items-center space-x-1"
+                className="pl-0 md:pl-4"
                 onClick={() => {
                   setIsOpenOption((isOpenOption) => !isOpenOption);
                   setTimeout(() => {
@@ -185,7 +185,7 @@ const DashboardLayout = ({ children }) => {
                 }}
               >
                 <img
-                  className="rounded-full w-7 lg:w-8 2xl:w-[45px] h-7 lg:h-8 2xl:h-[45px] cursor-pointer"
+                  className="rounded-full w-8 md:w-12 lg:w-10 2xl:w-[40px] h-8 md:h-12 lg:h-10 2xl:h-[40px]"
                   src="https://source.unsplash.com/360x360?people"
                   alt="people"
                 />
@@ -193,7 +193,7 @@ const DashboardLayout = ({ children }) => {
             </div>
           </div>
         </header>
-        <main className="mt-20 md:mt-0 px-5 md:px-12 py-5 lg:py-1 2xl:py-5 bg-white">
+        <main className="w-full bg-[#F5F5F5] mt-20 md:mt-28 lg:mt-0 px-5 md:px-12 lg:px-8 py-5 lg:py-4 2xl:py-5">
           {children}
         </main>
       </div>

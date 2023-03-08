@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AiFillEye } from "react-icons/ai";
 import authApi from "../../api/authApi";
 import AuthLayout from "../../components/AuthLayout";
@@ -25,6 +25,10 @@ const Register = () => {
     email: useRef(null),
     password: useRef(null),
   };
+
+  useEffect(() => {
+    document.title = "Sign up";
+  }, []);
 
   const inputClick = (value) => {
     inputRefs[value].current.style.top = "-12px";
