@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import { IoMdRemoveCircleOutline } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 import authApi from "../../../api/authApi";
 import userApi from "../../../api/userApi";
 import totalGoldMemberIcon from "../../../assets/images/Total_gold_member.svg";
@@ -10,9 +10,8 @@ import totalSilverMemberIcon from "../../../assets/images/Total_silver_member.sv
 import CustomCard from "../../../components/CustomCard";
 import CustomDropdown from "../../../components/CustomDropdown";
 import CustomPagination from "../../../components/CustomPagination";
-import { queryBuild } from "../../../utils/queryBuilder";
 import CustomSearch from "../../../components/CustomSearch";
-import { useNavigate } from "react-router-dom";
+import { queryBuild } from "../../../utils/queryBuilder";
 
 const DashboardMember = () => {
   const [totalOfMembers, setTotalOfMembers] = useState(0);
@@ -107,7 +106,9 @@ const DashboardMember = () => {
                 {["name", "email"].map((value, index) => (
                   <li key={index}>
                     <button
-                      onClick={() => setQuery({ ...query, _sort: value })}
+                      onClick={() => {
+                        setQuery({ ...query, _sort: value });
+                      }}
                       className="w-full text-start px-4 py-2 hover:bg-gray-100"
                     >
                       {value}

@@ -192,6 +192,10 @@ const DashboardProduct = () => {
                 <td className="py-6 text-end w-[55%] text-xl text-gray-600">
                   Product not found
                 </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
             ) : (
               products.map((value, index) => (

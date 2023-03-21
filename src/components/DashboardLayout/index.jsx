@@ -12,12 +12,9 @@ import notifIcon from "../../assets/images/Notification.svg";
 import signOutIcon from "../../assets/images/Sign_out_squre.svg";
 import CustomAlert from "../CustomAlert";
 import CustomModal from "../CustomModal";
-import OptionsMenu from "../OptionsMenu";
 
 const DashboardLayout = ({ children }) => {
   const [activeSide, setActiveSide] = useState(window.location.pathname);
-  const [isOpenOption, setIsOpenOption] = useState(false);
-  const [visibleOption, setVisibleOption] = useState(false);
   const [isOpenLogout, setIsOpenLogout] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
@@ -97,14 +94,6 @@ const DashboardLayout = ({ children }) => {
         bgColor={"bg-green-50"}
         title={"log out successfully"}
       />
-      {isOpenOption && (
-        <OptionsMenu
-          setIsOpen={setIsOpenOption}
-          visibleOption={visibleOption}
-          setVisibleOption={setVisibleOption}
-          setIsOpenLogout={setIsOpenLogout}
-        />
-      )}
       {isOpenLogout && (
         <CustomModal
           title={"Are you sure want to log out from dashboard?"}
@@ -165,24 +154,20 @@ const DashboardLayout = ({ children }) => {
               <button>
                 <img src={notifIcon} alt="notif icon" className="w-7 md:w-8 lg:w-5 2xl:w-6 h-7 md:h-8 lg:h-5 2xl:h-6" />
               </button>
-              <button>
+              <button className="group p-1">
                 <img
                   src={eidtProfileIcon}
                   alt="edit-profile icon"
                   className="hidden md:block w-6 md:w-8 lg:w-5 2xl:w-6 h-6 md:h-8 lg:h-5 2xl:h-6"
                 />
+                <div className="bg-white text-indigo-500 drop-shadow rounded-md px-5 py-2 absolute -bottom-9 right-20 hidden group-hover:block">Edit profile</div>
               </button>
-              <button>
+              <button className="group p-1">
                 <img src={signOutIcon} alt="signout icon" className="hidden md:block w-6 md:w-8 lg:w-5 2xl:w-6 h-6 md:h-8 lg:h-5 2xl:h-6" />
+                <div onClick={() => setIsOpenLogout((prev) => !prev)} className="bg-white hover:bg-slate-50 text-indigo-500 drop-shadow rounded-md px-5 py-2 absolute -bottom-9 right-9 hidden group-hover:block">Log out</div>
               </button>
               <button
                 className="pl-0 md:pl-4"
-                onClick={() => {
-                  setIsOpenOption((isOpenOption) => !isOpenOption);
-                  setTimeout(() => {
-                    setVisibleOption((prev) => !prev);
-                  }, 200);
-                }}
               >
                 <img
                   className="rounded-full w-8 md:w-12 lg:w-10 2xl:w-[40px] h-8 md:h-12 lg:h-10 2xl:h-[40px]"
