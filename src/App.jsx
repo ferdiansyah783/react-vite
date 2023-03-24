@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import CustomLoading from "./components/CustomLoading";
+import Main from "./pages/Main";
 const Dashboard = lazy(() =>
   wait(1000).then(() => import("./pages/Dashboard"))
 );
@@ -15,7 +16,7 @@ const App = () => {
           <Route exact path="/signin" element={<Login />} />
           <Route exact path="/signup" element={<Register />} />
           <Route exact path="/backstore/*" element={<Dashboard />} />
-          <Route exact path="/" element={<h1>iindex</h1>} />
+          <Route exact path="/" element={<Main />} />
         </Routes>
       </BrowserRouter>
     </Suspense>

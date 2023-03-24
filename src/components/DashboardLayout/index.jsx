@@ -166,7 +166,7 @@ const DashboardLayout = ({ children }) => {
                 <img src={signOutIcon} alt="signout icon" className="hidden md:block w-6 md:w-8 lg:w-5 2xl:w-6 h-6 md:h-8 lg:h-5 2xl:h-6" />
                 <div onClick={() => setIsOpenLogout((prev) => !prev)} className="bg-white hover:bg-slate-50 text-indigo-500 drop-shadow rounded-md px-5 py-2 absolute -bottom-9 right-9 hidden group-hover:block">Log out</div>
               </button>
-              <button
+              <div
                 className="pl-0 md:pl-4"
               >
                 <img
@@ -174,7 +174,7 @@ const DashboardLayout = ({ children }) => {
                   src="https://source.unsplash.com/360x360?people"
                   alt="people"
                 />
-              </button>
+              </div>
             </div>
           </div>
         </header>
