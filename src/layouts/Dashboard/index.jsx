@@ -85,6 +85,7 @@ const DashboardLayout = ({ children }) => {
       })
       .catch((error) => console.log(error));
   };
+  
 
   return (
     <div className="h-screen w-full bg-[#F5F5F5] flex relative font-poppins">
