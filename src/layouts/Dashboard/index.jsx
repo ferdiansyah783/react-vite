@@ -52,23 +52,23 @@ const DashboardLayout = ({ children }) => {
     navigate(link);
   };
 
-  // const sideMenu = [
-  //   {
-  //     logo: <AiOutlineBarChart />,
-  //     value: "Get started",
-  //     link: "/backstore",
-  //   },
-  //   {
-  //     logo: <HiOutlineUserCircle />,
-  //     value: "Members",
-  //     link: "/backstore/member",
-  //   },
-  //   {
-  //     logo: <BsCart4 />,
-  //     value: "Products",
-  //     link: "/backstore/product",
-  //   },
-  // ];
+  const sideMenu = [
+    {
+      logo: <AiOutlineBarChart />,
+      value: "Get started",
+      link: "/backstore",
+    },
+    {
+      logo: <HiOutlineUserCircle />,
+      value: "Members",
+      link: "/backstore/member",
+    },
+    {
+      logo: <BsCart4 />,
+      value: "Products",
+      link: "/backstore/product",
+    },
+  ];
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -102,7 +102,7 @@ const DashboardLayout = ({ children }) => {
           action={handleLogout}
         />
       )}
-      {/* <nav
+      <nav
         className={clsx(
           "border-r drop-shadow fixed lg:relative w-[60%] md:w-[40%] lg:w-[20%] 2xl:w-[14%] h-screen bg-white z-10 transition-all duration-300 ease-in-out",
           isOpenSidebar === true ? "-left-0" : "-left-60 md:-left-80 lg:-left-0"
@@ -131,7 +131,7 @@ const DashboardLayout = ({ children }) => {
             </li>
           ))}
         </ul>
-      </nav> */}
+      </nav>
       <div className="w-full h-full lg:w-[82%] xl:w-[86%]">
         <header className="fixed lg:relative z-10 w-full bg-white drop-shadow lg:drop-shadow-none px-12 py-9 md:py-6 lg:py-2">
           <div className="w-full h-full relative flex items-center justify-between">
