@@ -1,8 +1,4 @@
-import clsx from "clsx";
 import React, { useEffect, useState } from "react";
-import { AiOutlineBarChart } from "react-icons/ai";
-import { BsCart4 } from "react-icons/bs";
-import { HiOutlineUserCircle } from "react-icons/hi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 import authApi from "../../api/authApi";
@@ -10,11 +6,11 @@ import profileApi from "../../api/profileApi";
 import eidtProfileIcon from "../../assets/images/Edit_profile.svg";
 import notifIcon from "../../assets/images/Notification.svg";
 import signOutIcon from "../../assets/images/Sign_out_squre.svg";
-import CustomAlert from "../CustomAlert";
-import CustomModal from "../CustomModal";
+import CustomAlert from "../../components/CustomAlert";
+import CustomModal from "../../components/CustomModal";
+import DashboardSidebar from "./Sidebar";
 
 const DashboardLayout = ({ children }) => {
-  const [activeSide, setActiveSide] = useState(window.location.pathname);
   const [isOpenLogout, setIsOpenLogout] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [isOpenSidebar, setIsOpenSidebar] = useState(false);
@@ -47,29 +43,6 @@ const DashboardLayout = ({ children }) => {
       .catch((error) => console.log(error));
   }, []);
 
-  const handleSide = (link) => {
-    setActiveSide(link);
-    navigate(link);
-  };
-
-  const sideMenu = [
-    {
-      logo: <AiOutlineBarChart />,
-      value: "Get started",
-      link: "/backstore",
-    },
-    {
-      logo: <HiOutlineUserCircle />,
-      value: "Members",
-      link: "/backstore/member",
-    },
-    {
-      logo: <BsCart4 />,
-      value: "Products",
-      link: "/backstore/product",
-    },
-  ];
-
   const handleLogout = () => {
     localStorage.removeItem("token");
 
@@ -101,36 +74,8 @@ const DashboardLayout = ({ children }) => {
           action={handleLogout}
         />
       )}
-      <nav
-        className={clsx(
-          "border-r drop-shadow fixed lg:relative w-[60%] md:w-[40%] lg:w-[20%] 2xl:w-[14%] h-screen bg-white z-10 transition-all duration-300 ease-in-out",
-          isOpenSidebar === true ? "-left-0" : "-left-60 md:-left-80 lg:-left-0"
-        )}
-      >
-        <div className="px-5 py-7 hidden lg:flex justify-center items-center space-x-3">
-          <h1 className="text-2xl lg:text-xl 2xl:text-2xl font-extrabold text-[#141414]">
-            Dashboard
-          </h1>
-        </div>
-        <ul className="space-y-1 pt-24 md:pt-28 lg:pt-0">
-          {sideMenu.map((value, index) => (
-            <li key={index} className="px-2">
-              <button
-                onClick={() => handleSide(value.link)}
-                className={clsx(
-                  "py-3 md:py-4 2xl:py-3 px-3 w-full flex items-center space-x-3 rounded-xl",
-                  activeSide === value.link
-                    ? "active bg-indigo-600 text-white"
-                    : "hover:bg-indigo-600 hover:bg-opacity-5"
-                )}
-              >
-                <span className="text-lg md:text-2xl lg:text-lg 2xl:text-xl">{value.logo}</span>
-                <span className="text-sm md:text-lg lg:text-sm 2xl:text-base">{value.value}</span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      </nav>
+
+      <DashboardSidebar isOpenSidebar={isOpenSidebar} />
       <div className="w-full h-full lg:w-[82%] xl:w-[86%]">
         <header className="fixed lg:relative z-10 w-full bg-white drop-shadow lg:drop-shadow-none px-12 py-9 md:py-6 lg:py-2">
           <div className="w-full h-full relative flex items-center justify-between">
@@ -152,7 +97,11 @@ const DashboardLayout = ({ children }) => {
             </div>
             <div className="absolute -right-7 flex items-center space-x-1 md:space-x-5 md:right-0 md:relative">
               <button>
-                <img src={notifIcon} alt="notif icon" className="w-7 md:w-8 lg:w-5 2xl:w-6 h-7 md:h-8 lg:h-5 2xl:h-6" />
+                <img
+                  src={notifIcon}
+                  alt="notif icon"
+                  className="w-7 md:w-8 lg:w-5 2xl:w-6 h-7 md:h-8 lg:h-5 2xl:h-6"
+                />
               </button>
               <button className="group p-1">
                 <img
@@ -160,15 +109,24 @@ const DashboardLayout = ({ children }) => {
                   alt="edit-profile icon"
                   className="hidden md:block w-6 md:w-8 lg:w-5 2xl:w-6 h-6 md:h-8 lg:h-5 2xl:h-6"
                 />
-                <div className="bg-white text-indigo-500 drop-shadow rounded-md px-5 py-2 absolute -bottom-9 right-20 hidden group-hover:block">Edit profile</div>
+                <div className="bg-white text-indigo-500 drop-shadow rounded-md px-5 py-2 absolute -bottom-9 right-20 hidden group-hover:block">
+                  Edit profile
+                </div>
               </button>
               <button className="group p-1">
-                <img src={signOutIcon} alt="signout icon" className="hidden md:block w-6 md:w-8 lg:w-5 2xl:w-6 h-6 md:h-8 lg:h-5 2xl:h-6" />
-                <div onClick={() => setIsOpenLogout((prev) => !prev)} className="bg-white hover:bg-slate-50 text-indigo-500 drop-shadow rounded-md px-5 py-2 absolute -bottom-9 right-9 hidden group-hover:block">Log out</div>
+                <img
+                  src={signOutIcon}
+                  alt="signout icon"
+                  className="hidden md:block w-6 md:w-8 lg:w-5 2xl:w-6 h-6 md:h-8 lg:h-5 2xl:h-6"
+                />
+                <div
+                  onClick={() => setIsOpenLogout((prev) => !prev)}
+                  className="bg-white hover:bg-slate-50 text-indigo-500 drop-shadow rounded-md px-5 py-2 absolute -bottom-9 right-9 hidden group-hover:block"
+                >
+                  Log out
+                </div>
               </button>
-              <button
-                className="pl-0 md:pl-4"
-              >
+              <button className="pl-0 md:pl-4">
                 <img
                   className="rounded-full w-8 md:w-12 lg:w-10 2xl:w-[40px] h-8 md:h-12 lg:h-10 2xl:h-[40px]"
                   src="https://source.unsplash.com/360x360?people"
