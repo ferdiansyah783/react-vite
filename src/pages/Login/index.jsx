@@ -3,9 +3,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { AiFillEye } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import authApi from "../../api/authApi";
-import AuthLayout from "../../components/AuthLayout";
 import CustomAlert from "../../components/CustomAlert";
 import { validate } from "../../utils/validation";
+import AuthLayout from "../../layouts/Auth";
 
 const Login = () => {
   const [fieldsLogin, setFieldsLogin] = useState({

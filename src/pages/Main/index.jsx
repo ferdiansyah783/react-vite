@@ -1,11 +1,11 @@
 import React from 'react'
-import MainLayout from '../../components/MainLayout'
+import MainLayout from '../../layouts/MainLayout'
 
 const Main = () => {
   return (
-    <>
-        <MainLayout />
-    </>
+    <div>
+      <MainLayout />
+    </div>
   )
 }
 

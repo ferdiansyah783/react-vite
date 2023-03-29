@@ -10,8 +10,8 @@ import profileApi from "../../api/profileApi";
 import eidtProfileIcon from "../../assets/images/Edit_profile.svg";
 import notifIcon from "../../assets/images/Notification.svg";
 import signOutIcon from "../../assets/images/Sign_out_squre.svg";
-import CustomAlert from "../CustomAlert";
-import CustomModal from "../CustomModal";
+import CustomAlert from "../../components/CustomAlert";
+import CustomModal from "../../components/CustomModal";
 
 const DashboardLayout = ({ children }) => {
   const [activeSide, setActiveSide] = useState(window.location.pathname);
@@ -166,7 +166,7 @@ const DashboardLayout = ({ children }) => {
                 <img src={signOutIcon} alt="signout icon" className="hidden md:block w-6 md:w-8 lg:w-5 2xl:w-6 h-6 md:h-8 lg:h-5 2xl:h-6" />
                 <div onClick={() => setIsOpenLogout((prev) => !prev)} className="bg-white hover:bg-slate-50 text-indigo-500 drop-shadow rounded-md px-5 py-2 absolute -bottom-9 right-9 hidden group-hover:block">Log out</div>
               </button>
-              <div
+              <button
                 className="pl-0 md:pl-4"
               >
                 <img
@@ -174,7 +174,7 @@ const DashboardLayout = ({ children }) => {
                   src="https://source.unsplash.com/360x360?people"
                   alt="people"
                 />
-              </div>
+              </button>
             </div>
           </div>
         </header>

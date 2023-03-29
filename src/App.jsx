@@ -1,12 +1,12 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import CustomLoading from "./components/CustomLoading";
-import Main from "./pages/Main";
 const Dashboard = lazy(() =>
   wait(1000).then(() => import("./pages/Dashboard"))
 );
 const Login = lazy(() => wait(1000).then(() => import("./pages/Login")));
 const Register = lazy(() => wait(1000).then(() => import("./pages/Register")));
+const Main = lazy(() => wait(1000).then(() => import("./pages/Main")));
 
 const App = () => {
   return (
