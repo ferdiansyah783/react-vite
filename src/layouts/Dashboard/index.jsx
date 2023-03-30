@@ -105,7 +105,7 @@ const DashboardLayout = ({ children }) => {
       <nav
         className={clsx(
           "border-r drop-shadow fixed lg:relative w-[60%] md:w-[40%] lg:w-[20%] 2xl:w-[14%] h-screen bg-white z-10 transition-all duration-300 ease-in-out",
-          isOpenSidebar === true ? "-left-0" : "-left-60 md:-left-80 lg:-left-0"
+          isOpenSidebar === true ? "-left-0" : "-left-60 md:-left-96 lg:-left-0"
         )}
       >
         <div className="px-5 py-7 hidden lg:flex justify-center items-center space-x-3">
@@ -119,7 +119,7 @@ const DashboardLayout = ({ children }) => {
               <button
                 onClick={() => handleSide(value.link)}
                 className={clsx(
-                  "py-3 md:py-4 2xl:py-3 px-3 w-full flex items-center space-x-3 rounded-xl",
+                  "p-3 w-full flex items-center space-x-3 rounded-xl text-indigo-600",
                   activeSide === value.link
                     ? "active bg-indigo-600 text-white"
                     : "hover:bg-indigo-600 hover:bg-opacity-5"
@@ -171,7 +171,7 @@ const DashboardLayout = ({ children }) => {
                 className="pl-0 md:pl-4"
               >
                 <img
-                  className="rounded-full w-8 md:w-12 lg:w-10 2xl:w-[40px] h-8 md:h-12 lg:h-10 2xl:h-[40px]"
+                  className="rounded-full w-8 md:w-12 lg:w-8 2xl:w-[40px] h-8 md:h-12 lg:h-8 2xl:h-[40px]"
                   src="https://source.unsplash.com/360x360?people"
                   alt="people"
                 />

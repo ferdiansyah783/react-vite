@@ -8,6 +8,8 @@ import totalMemberIcon from "../../../assets/images/Total_member.svg";
 import totalProductIcon from "../../../assets/images/Total_product.svg";
 import totalProfiteIcon from "../../../assets/images/Total_profite.svg";
 import CustomCard from "../../../components/CustomCard";
+import { Line } from "react-chartjs-2";
+import Chart from "chart.js/auto";
 
 const DashboardMain = () => {
   const [totalOfMembers, setTotalOfMembers] = useState(0);
@@ -39,57 +41,84 @@ const DashboardMain = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  //   const data = [
-  //     {
-  //       id: 1,
-  //       year: 2018,
-  //       userGain: 80000,
-  //       userLost: 823,
-  //     },
-  //     {
-  //       id: 2,
-  //       year: 2019,
-  //       userGain: 45677,
-  //       userLost: 345,
-  //     },
-  //     {
-  //       id: 3,
-  //       year: 2021,
-  //       userGain: 78888,
-  //       userLost: 555,
-  //     },
-  //     {
-  //       id: 4,
-  //       year: 2022,
-  //       userGain: 90000,
-  //       userLost: 4555,
-  //     },
-  //     {
-  //       id: 5,
-  //       year: 2023,
-  //       userGain: 4300,
-  //       userLost: 234,
-  //     },
-  //   ];
+  const chartData = {
+    labels: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+      "",
+    ],
+    datasets: [
+      {
+        label: "Sales",
+        fill: "start",
+        backgroundColor: function (context) {
+          const chart = context.chart;
+          const { ctx, chartArea } = chart;
 
-  //   const [chartData, setChartData] = useState({
-  //     labels: data.map((data) => data.year),
-  //     datasets: [
-  //       {
-  //         label: "Users Gained ",
-  //         data: data.map((data) => data.userGain),
-  //         backgroundColor: [
-  //           "rgba(75,192,192,1)",
-  //           "#ecf0f1",
-  //           "#50AF95",
-  //           "#f3ba2f",
-  //           "#2a71d0",
-  //         ],
-  //         borderColor: "black",
-  //         borderWidth: 2,
-  //       },
-  //     ],
-  //   });
+          if (!chartArea) {
+            // This case happens on initial chart load
+            return;
+          }
+          return getGradient(ctx, chartArea);
+        },
+        borderColor: "rgba(0,0,0,0)",
+        borderWidth: 2,
+        data: [10, 30, 40, 50, 70, 80, 70, 50, 40, 30, 60, 90, 70],
+      },
+    ],
+  };
+
+  const chartOptions = {
+    title: {
+      display: true,
+      text: "Sales",
+      fontSize: 20,
+    },
+    legend: {
+      display: true,
+      position: "right",
+    },
+    responsive: true,
+    maintainAspectRatio: false,
+    elements: {
+      line: {
+        tension: 0.4, // set the line tension here
+      },
+    },
+    
+  };
+
+  let width, height, gradient;
+  function getGradient(ctx, chartArea) {
+    const chartWidth = chartArea.right - chartArea.left;
+    const chartHeight = chartArea.bottom - chartArea.top;
+    if (!gradient || width !== chartWidth || height !== chartHeight) {
+      // Create the gradient because this is either the first render
+      // or the size of the chart has changed
+      width = chartWidth;
+      height = chartHeight;
+      gradient = ctx.createLinearGradient(
+        0,
+        chartArea.bottom,
+        0,
+        chartArea.top
+      );
+      gradient.addColorStop(0, "#4F46E500");
+      gradient.addColorStop(1, "#4F46E5");
+    }
+
+    return gradient;
+  }
 
   const cardMenu = [
     {
@@ -126,9 +155,11 @@ const DashboardMain = () => {
           />
         ))}
       </div>
-      <div className="grid grid-cols-2 gap-5">
-        {/* <CustomChart chartData={chartData} /> */}
-        {/* <CustomChart chartData={chartData} /> */}
+      <div className="bg-white p-10 drop-shadow rounded-xl hidden md:block">
+        <h1 className="font-bold text-xl 2xl:text-2xl">Product Data Sold</h1>
+        <div className="h-[300px] 2xl:h-[500px]">
+          <Line data={chartData} options={chartOptions} />
+        </div>
       </div>
     </div>
   );
