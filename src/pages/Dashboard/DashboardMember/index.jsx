@@ -28,7 +28,7 @@ const DashboardMember = () => {
   const queryBuilder = queryBuild(query);
 
   useEffect(() => {
-    if (!localStorage.getItem("token")) return navigate("/signin");
+    if (!localStorage.getItem("token")) return navigate("/admin");
 
     authApi.setHeader();
 

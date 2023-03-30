@@ -18,7 +18,7 @@ const DashboardMain = () => {
   const navigate = useNavigate(null);
 
   useEffect(() => {
-    if (!localStorage.getItem("token")) return navigate("/signin");
+    if (!localStorage.getItem("token")) return navigate("/admin");
 
     authApi.setHeader();
 

@@ -12,7 +12,13 @@ const MainLayout = () => {
   const [isVisibleSize, setIsVisibleSize] = useState(false);
 
   return (
-    <div className="w-full h-screen flex bg-white font-poppins">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="w-full h-screen flex bg-white font-poppins"
+    >
       <nav className="w-[290px] h-full border-r">
         <div className="h-24 flex justify-center items-center border-b space-x-1">
           <span className="text-4xl text-indigo-600">
@@ -256,7 +262,7 @@ const MainLayout = () => {
           </div>
         </header>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

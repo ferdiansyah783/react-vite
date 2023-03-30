@@ -12,6 +12,7 @@ import notifIcon from "../../assets/images/Notification.svg";
 import signOutIcon from "../../assets/images/Sign_out_squre.svg";
 import CustomAlert from "../../components/CustomAlert";
 import CustomModal from "../../components/CustomModal";
+import { motion } from "framer-motion";
 
 const DashboardLayout = ({ children }) => {
   const [activeSide, setActiveSide] = useState(window.location.pathname);
@@ -27,7 +28,7 @@ const DashboardLayout = ({ children }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!localStorage.getItem("token")) return navigate("/signin");
+    if (!localStorage.getItem("token")) return navigate("/admin");
 
     document.title = "Back Store";
 
@@ -80,15 +81,20 @@ const DashboardLayout = ({ children }) => {
 
         setIsOpenAlert(true);
         setTimeout(() => {
-          navigate("/signin");
+          navigate("/admin");
         }, 2000);
       })
       .catch((error) => console.log(error));
   };
-  
 
   return (
-    <div className="h-screen w-full bg-[#F5F5F5] flex relative font-poppins">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="h-screen w-full bg-[#F5F5F5] flex relative font-poppins"
+    >
       <CustomAlert
         isOpen={isOpenAlert}
         textColor={"text-green-800"}
@@ -125,8 +131,12 @@ const DashboardLayout = ({ children }) => {
                     : "hover:bg-indigo-600 hover:bg-opacity-5"
                 )}
               >
-                <span className="text-lg md:text-2xl lg:text-lg 2xl:text-xl">{value.logo}</span>
-                <span className="text-sm md:text-lg lg:text-sm 2xl:text-base">{value.value}</span>
+                <span className="text-lg md:text-2xl lg:text-lg 2xl:text-xl">
+                  {value.logo}
+                </span>
+                <span className="text-sm md:text-lg lg:text-sm 2xl:text-base">
+                  {value.value}
+                </span>
               </button>
             </li>
           ))}
@@ -153,7 +163,11 @@ const DashboardLayout = ({ children }) => {
             </div>
             <div className="absolute -right-7 flex items-center space-x-1 md:space-x-5 md:right-0 md:relative">
               <button>
-                <img src={notifIcon} alt="notif icon" className="w-7 md:w-8 lg:w-5 2xl:w-6 h-7 md:h-8 lg:h-5 2xl:h-6" />
+                <img
+                  src={notifIcon}
+                  alt="notif icon"
+                  className="w-7 md:w-8 lg:w-5 2xl:w-6 h-7 md:h-8 lg:h-5 2xl:h-6"
+                />
               </button>
               <button className="group p-1">
                 <img
@@ -161,15 +175,24 @@ const DashboardLayout = ({ children }) => {
                   alt="edit-profile icon"
                   className="hidden md:block w-6 md:w-8 lg:w-5 2xl:w-6 h-6 md:h-8 lg:h-5 2xl:h-6"
                 />
-                <div className="bg-white text-indigo-500 drop-shadow rounded-md px-5 py-2 absolute -bottom-9 right-20 hidden group-hover:block">Edit profile</div>
+                <div className="bg-white text-indigo-500 drop-shadow rounded-md px-5 py-2 absolute -bottom-9 right-20 hidden group-hover:block">
+                  Edit profile
+                </div>
               </button>
               <button className="group p-1">
-                <img src={signOutIcon} alt="signout icon" className="hidden md:block w-6 md:w-8 lg:w-5 2xl:w-6 h-6 md:h-8 lg:h-5 2xl:h-6" />
-                <div onClick={() => setIsOpenLogout((prev) => !prev)} className="bg-white hover:bg-slate-50 text-indigo-500 drop-shadow rounded-md px-5 py-2 absolute -bottom-9 right-9 hidden group-hover:block">Log out</div>
+                <img
+                  src={signOutIcon}
+                  alt="signout icon"
+                  className="hidden md:block w-6 md:w-8 lg:w-5 2xl:w-6 h-6 md:h-8 lg:h-5 2xl:h-6"
+                />
+                <div
+                  onClick={() => setIsOpenLogout((prev) => !prev)}
+                  className="bg-white hover:bg-slate-50 text-indigo-500 drop-shadow rounded-md px-5 py-2 absolute -bottom-9 right-9 hidden group-hover:block"
+                >
+                  Log out
+                </div>
               </button>
-              <button
-                className="pl-0 md:pl-4"
-              >
+              <button className="pl-0 md:pl-4">
                 <img
                   className="rounded-full w-8 md:w-12 lg:w-8 2xl:w-[40px] h-8 md:h-12 lg:h-8 2xl:h-[40px]"
                   src="https://source.unsplash.com/360x360?people"
@@ -183,7 +206,7 @@ const DashboardLayout = ({ children }) => {
           {children}
         </main>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
