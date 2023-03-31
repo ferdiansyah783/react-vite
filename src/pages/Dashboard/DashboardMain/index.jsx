@@ -95,7 +95,6 @@ const DashboardMain = () => {
         tension: 0.4, // set the line tension here
       },
     },
-    
   };
 
   let width, height, gradient;
@@ -157,7 +156,7 @@ const DashboardMain = () => {
       </div>
       <div className="bg-white p-10 drop-shadow rounded-xl hidden md:block">
         <h1 className="font-bold text-xl 2xl:text-2xl">Product Data Sold</h1>
-        <div className="h-[300px] 2xl:h-[500px]">
+        <div className="h-[250px] 2xl:h-[500px]">
           <Line data={chartData} options={chartOptions} />
         </div>
       </div>
