@@ -6,7 +6,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { AiFillAmazonSquare, AiOutlineHeart } from "react-icons/ai";
 import { MdLanguage } from "react-icons/md";
 
-const MainLayout = () => {
+const MainLayout = ({ children }) => {
   const [isVisibleTipe, setIsVisibleTipe] = useState(false);
   const [isVisibleColour, setIsVisibleColour] = useState(false);
   const [isVisibleSize, setIsVisibleSize] = useState(false);
@@ -261,6 +261,7 @@ const MainLayout = () => {
             />
           </div>
         </header>
+        <main className="px-8 py-4">{children}</main>
       </div>
     </motion.div>
   );
