@@ -1,7 +1,7 @@
 {
   "name": "react-ecomerce",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "1.1.4",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -20,5 +20,9 @@
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7",
     "vite": "^4.1.0"
-  }
+  },
+  "main": "vite.config.js",
+  "author": "ferdiansyah",
+  "license": "ISC",
+  "description": "Sedang Belajar React"
 }
